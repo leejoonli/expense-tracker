@@ -42,13 +42,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View>
-        {expenses && (<FlatList data={expenses} renderItem={({ item }) => <Text>{item.name}</Text>} style={styles.list} />)}
-      </View>
-      <View>
-        {expenses && (<FlatList data={expenses} renderItem={({ item }) => <Text>{item.category}</Text>} style={styles.list2} />)}
-      </View>
-      <TextInput placeholder='type here' onChange={handleChange} value={text} style={styles.test} />
+      {expenses && (<View><FlatList data={expenses} horizontal={true} inverted={true} renderItem={({ item }) => <Text style={styles.testtext}>{item.name}</Text>} /></View>)}
+      {/* <View>
+        {expenses && (<FlatList data={expenses} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} style={styles.list2} />)}
+      </View> */}
+      <TextInput placeholder='type here' onChange={handleChange} value={text} />
       <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable>
       <StatusBar style="auto" />
     </View>
@@ -62,13 +60,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  list: {
+  testtext: {
+    border: '1px solid red',
     flex: 1,
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-  list2: {
-    flex: 1,
-    flexDirection: 'row',
   },
 });
