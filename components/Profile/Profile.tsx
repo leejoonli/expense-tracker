@@ -1,12 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, Pressable, Button, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, FlatList, Pressable, Button, NativeSyntheticEvent, TextInputChangeEventData, ScrollView } from 'react-native';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+// need to find types for props that are currently listed
 function Profile({ navigation, route }) {
     // interface for data from api call
     interface Data {
@@ -57,13 +54,24 @@ function Profile({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            {expenses && (<FlatList data={expenses} horizontal={true} style={styles.expenseList} inverted={true} renderItem={({ item }) => <Text style={styles.testtext}>{item.name}</Text>} />)}
-            {/* {expenses && (<FlatList data={expenses} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} style={styles.list2} />)} */}
+            {expenses && (
+                <FlatList
+                    data={expenses}
+                    style={styles.expenseList}
+                    renderItem={({ item }) => (
+                        <Pressable onPress={() => navigation.navigate('ExpenseDetail', { id: item.id })} style={styles.pressTest}>
+                            <View style={{ backgroundColor: 'lemonchiffon' }}>
+                                <Text>{item.name}</Text>
+                            </View>
+                        </Pressable>
+                    )} />)}
+            {/* {expenses && (<FlatList data={expenses} style={styles.expenseList} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} />)} */}
             <View style={styles.testContainer}>
                 <TextInput placeholder='type here' onChange={handleChange} value={text} />
-                <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable>
+                {/* <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable> */}
                 <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
                 <Button title='go to test' onPress={() => navigation.navigate('test', { name: 'Lulu' })} />
+                <Pressable onPress={() => navigation.navigate('ExpenseDetail')}><Text>Go to expense detail</Text></Pressable>
                 <StatusBar style="auto" />
                 <Text>
                     hello from {route.params.name}
@@ -82,6 +90,10 @@ const styles = StyleSheet.create({
     },
     expenseList: {
         flex: 1,
+    },
+    pressTest: {
+        borderWidth: 1,
+        borderColor: 'rgba(155, 0, 0, 1)',
     },
     testContainer: {
         flex: 1,
