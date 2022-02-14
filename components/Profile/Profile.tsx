@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, Pressable, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, FlatList, Pressable, Button, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
+
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Profile({ navigation, route }) {
     interface Data {
@@ -32,7 +35,7 @@ function Profile({ navigation, route }) {
         }
     }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: any) => {
         setText(event.target.value);
     }
 
@@ -47,6 +50,7 @@ function Profile({ navigation, route }) {
             <TextInput placeholder='type here' onChange={handleChange} value={text} />
             <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable>
             <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
+            <Button title='go to test' onPress={() => navigation.navigate('test', { name: 'Lulu' })} />
             <StatusBar style="auto" />
             <Text>
                 hello from {route.params.name}
