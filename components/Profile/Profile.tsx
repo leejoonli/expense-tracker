@@ -8,6 +8,7 @@ import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Profile({ navigation, route }) {
+    // interface for data from api call
     interface Data {
         id: number,
         name: string,
@@ -16,29 +17,40 @@ function Profile({ navigation, route }) {
         date: string,
     }
 
+    // initial state using the interface
     let init: Array<Data> = [];
 
+    // set list of expenses state to init variable
     const [expenses, setExpenses] = useState(init);
+
+    // test for text input
     const [text, setText] = useState('');
 
+    // useEffect to make api call to fetch data
     useEffect(() => {
         getData();
     }, []);
 
     const getData = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/expenses/`);
+            // make axios api call to heroku app
+            const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/`);
+            // extract data from response
             const data = res.data;
+            // set state to data variable
             setExpenses(data);
         } catch (error) {
+            // error logging
             console.log(error);
         }
     }
 
+    // handle change test for text input.  need to figure out event type
     const handleChange = (event: any) => {
         setText(event.target.value);
     }
 
+    // on press test for native pressable core component
     const onPressFunction = () => {
         console.log('you pressed me');
     }
