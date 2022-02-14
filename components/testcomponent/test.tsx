@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 function test(props) {
     return (
         <Text>
-            hello world
+            hello {props.route.params.name}
         </Text>
     );
 }

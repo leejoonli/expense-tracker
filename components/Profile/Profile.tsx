@@ -32,7 +32,7 @@ function Profile({ navigation, route }) {
         }
     }
 
-    const handleChange = (event: any) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setText(event.target.value);
     }
 

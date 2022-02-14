@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
 import Profile from './components/Profile/Profile';
 import Home from './components/Home/Home';
+import test from './components/testcomponent/test';
 import axios from 'axios';
 
 export default function App() {
@@ -60,6 +61,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name='Home' component={Home} options={{ title: 'Welcome' }} />
         <Stack.Screen name='Profile' component={Profile} />
+        <Stack.Screen name='test' component={test} />
       </Stack.Navigator>
     </NavigationContainer>
   );
