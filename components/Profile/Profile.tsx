@@ -57,16 +57,18 @@ function Profile({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            {expenses && (<View><FlatList data={expenses} horizontal={true} inverted={true} renderItem={({ item }) => <Text style={styles.testtext}>{item.name}</Text>} /></View>)}
+            {expenses && (<FlatList data={expenses} horizontal={true} style={styles.expenseList} inverted={true} renderItem={({ item }) => <Text style={styles.testtext}>{item.name}</Text>} />)}
             {/* {expenses && (<FlatList data={expenses} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} style={styles.list2} />)} */}
-            <TextInput placeholder='type here' onChange={handleChange} value={text} />
-            <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable>
-            <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
-            <Button title='go to test' onPress={() => navigation.navigate('test', { name: 'Lulu' })} />
-            <StatusBar style="auto" />
-            <Text>
-                hello from {route.params.name}
-            </Text>
+            <View style={styles.testContainer}>
+                <TextInput placeholder='type here' onChange={handleChange} value={text} />
+                <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable>
+                <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
+                <Button title='go to test' onPress={() => navigation.navigate('test', { name: 'Lulu' })} />
+                <StatusBar style="auto" />
+                <Text>
+                    hello from {route.params.name}
+                </Text>
+            </View>
         </View>
     );
 }
@@ -78,8 +80,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    expenseList: {
+        flex: 1,
+    },
+    testContainer: {
+        flex: 1,
+    },
     testtext: {
-        border: '1px solid red',
+        borderColor: 'rgba(155, 0, 0, 1)',
+        borderWidth: 2,
         flex: 1,
     },
 });
