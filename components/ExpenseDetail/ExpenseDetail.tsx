@@ -55,6 +55,7 @@ function ExpenseDetail({ navigation, route }) {
             // set state to array of keys
             setKeys(keys);
         } catch (error) {
+            // error logging
             console.log(error)
         }
     }

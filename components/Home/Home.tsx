@@ -5,9 +5,6 @@ import axios from 'axios';
 // home component will be the login screen
 // set types for props
 function Home({ navigation }) {
-    // set state to conditionally render home component
-    const [display, setDisplay] = useState(true);
-
     // sign up init type declaration
     const signUpInit: {
         username: string,
@@ -30,6 +27,7 @@ function Home({ navigation }) {
         password: '',
     }
 
+    // state variables for showing/closing sign up and login modals and sign up and login inputs
     const [signUpInput, setSignUpInput] = useState(signUpInit);
     const [loginInput, setloginInput] = useState(logInInit);
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
@@ -47,47 +45,52 @@ function Home({ navigation }) {
 
     // sign up request
     const handleSignUpSubmit = async () => {
-        console.log('hello world sign up');
+        try {
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // login request
-    const handleLoginSubmit = async () => {
+    const handleLoginSubmit = async (): Promise<void> => {
         try {
-            // post request for auth token
+            // post request to get auth token
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput);
-            console.log(res);
+            // console.log(res);
             const status: number = res.status;
             if (status === 200) {
                 localStorage.setItem('token', res.data.auth_token);
+                setLoginModal(!loginModal);
             }
         } catch (error) {
+            // error logging
             console.log(error);
         }
     }
 
     // logout request
-    const handleLogout = async () => {
+    const handleLogout = async (): Promise<void> => {
         try {
+            // post request to destroy auth token
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, localStorage.getItem('token'), {
                 headers: { Authorization: `Token ${localStorage.getItem('token')}` }
             });
+            // if status is 204 clear local storage
             const status: number = res.status;
             if (status === 204) {
                 localStorage.clear();
-                console.log('token destroyed');
+                // console.log('token destroyed');
             }
         } catch (error) {
+            // error logging
             console.log(error);
         }
     }
 
-    // render a sign up or login screen depending on state
     return (
-        // <View>
-        //     {display && <Button title='go to profile' onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} />}
-        //     {/* <Button title='go to profile' onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} /> */}
-        // </View>
         <View>
+            {/* sign up modal */}
             <Modal
                 animationType='slide'
                 visible={signUpModal}
@@ -104,6 +107,7 @@ function Home({ navigation }) {
                     <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
+            {/* login modal */}
             <Modal
                 animationType='slide'
                 visible={loginModal}
@@ -118,6 +122,7 @@ function Home({ navigation }) {
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
+            {/* pressables to show either sign up or login modal */}
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
             <Pressable onPress={handleLogout}><Text>log out</Text></Pressable>
