@@ -7,7 +7,20 @@ function Home({ navigation }) {
     // set state to conditionally render home component
     const [display, setDisplay] = useState(true);
 
-    const [signUpInput, setSignUpInput] = useState<string>('');
+    // initialize signup input
+    const signUpInit: {
+        username: string,
+        email: string,
+        password: string,
+        re_password: string,
+    } = {
+        username: '',
+        email: '',
+        password: '',
+        re_password: '',
+    }
+
+    const [signUpInput, setSignUpInput] = useState<object>(signUpInit);
     const [loginInput, setloginInput] = useState<string>('');
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
@@ -43,7 +56,10 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='sign up' onChange={handleSignUpChange} value={signUpInput} />
+                    <TextInput placeholder='Username' onChange={handleSignUpChange} value={signUpInput} />
+                    <TextInput placeholder='E-mail' onChange={handleSignUpChange} value={signUpInput} />
+                    <TextInput placeholder='Password' onChange={handleSignUpChange} value={signUpInput} />
+                    <TextInput placeholder='Re Password' onChange={handleSignUpChange} value={signUpInput} />
                     <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
