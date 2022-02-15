@@ -7,8 +7,8 @@ import axios from 'axios';
 function Home({ navigation }) {
     // sign up init type declaration
     const signUpInit: {
-        username: string,
         email: string,
+        username: string,
         password: string,
         re_password: string,
     } = {
@@ -86,9 +86,14 @@ function Home({ navigation }) {
     }
 
     // sign up request
-    const handleSignUpSubmit = async () => {
+    const handleSignUpSubmit = async (): Promise<void> => {
         try {
-
+            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/users/`, signUpInput);
+            // console.log(res);
+            const status: number = res.status;
+            if (status === 201) {
+                setUser(res.data);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -143,8 +148,8 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='Username' onChange={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
                     <TextInput placeholder='E-mail' onChange={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
+                    <TextInput placeholder='Username' onChange={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
                     <TextInput placeholder='Password' onChange={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
                     <TextInput placeholder='Re Password' onChange={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
                     <Pressable onPress={handleSignUpSubmit}><Text>submit</Text></Pressable>
