@@ -26,8 +26,8 @@ function Home({ navigation }) {
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
     // handle change function for sign up request
-    const handleSignUpChange = (event) => {
-        setSignUpInput(event.target.value);
+    const handleSignUpChange = (event, key: string) => {
+        setSignUpInput({ ...signUpInput, [key]: event.target.value });
     }
 
     // handle change function for login request
@@ -56,10 +56,10 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='Username' onChange={handleSignUpChange} value={signUpInput.username} />
-                    <TextInput placeholder='E-mail' onChange={handleSignUpChange} value={signUpInput.email} />
-                    <TextInput placeholder='Password' onChange={handleSignUpChange} value={signUpInput.password} />
-                    <TextInput placeholder='Re Password' onChange={handleSignUpChange} value={signUpInput.re_password} />
+                    <TextInput placeholder='Username' onChange={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
+                    <TextInput placeholder='E-mail' onChange={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
+                    <TextInput placeholder='Password' onChange={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
+                    <TextInput placeholder='Re Password' onChange={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
                     <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
