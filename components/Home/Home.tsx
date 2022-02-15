@@ -7,7 +7,7 @@ function Home({ navigation }) {
     // set state to conditionally render home component
     const [display, setDisplay] = useState(true);
 
-    // initialize signup input
+    // sign up init type declaration
     const signUpInit: {
         username: string,
         email: string,
@@ -20,8 +20,17 @@ function Home({ navigation }) {
         re_password: '',
     }
 
+    // log in init type declaration
+    const logInInit: {
+        email: string,
+        password: string,
+    } = {
+        email: '',
+        password: '',
+    }
+
     const [signUpInput, setSignUpInput] = useState(signUpInit);
-    const [loginInput, setloginInput] = useState<string>('');
+    const [loginInput, setloginInput] = useState(logInInit);
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
