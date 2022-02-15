@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
+import axios from 'axios';
 
 // home component will be the login screen
 // set types for props
@@ -45,8 +46,24 @@ function Home({ navigation }) {
     }
 
     // sign up request
+    const handleSignUpSubmit = async () => {
+        console.log('hello world sign up');
+    }
 
     // login request
+    const handleLoginSubmit = async () => {
+        try {
+            // post request for auth token
+            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput);
+            console.log(res);
+            const status: number = res.status;
+            if (status === 200) {
+                localStorage.setItem('token', res.data.auth_token);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // logout request
 
@@ -69,6 +86,7 @@ function Home({ navigation }) {
                     <TextInput placeholder='E-mail' onChange={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
                     <TextInput placeholder='Password' onChange={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
                     <TextInput placeholder='Re Password' onChange={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
+                    <Pressable onPress={handleSignUpSubmit}><Text>submit</Text></Pressable>
                     <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
@@ -82,6 +100,7 @@ function Home({ navigation }) {
                 <View>
                     <TextInput placeholder='email' onChange={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
                     <TextInput placeholder='password' onChange={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
+                    <Pressable onPress={handleLoginSubmit}><Text>log in</Text></Pressable>
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
