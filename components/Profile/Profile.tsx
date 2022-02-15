@@ -28,7 +28,7 @@ function Profile({ navigation, route }) {
         getData();
     }, []);
 
-    const getData = async () => {
+    const getData = async (): Promise<void> => {
         try {
             // make axios api call to heroku app
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/`);

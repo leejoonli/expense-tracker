@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, Button, View } from 'react-native';
 
 // home component will be the login screen
+// set types for props
 function Home({ navigation }) {
     // set state to conditionally render home component
     const [display, setDisplay] = useState(true);
