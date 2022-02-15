@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
 import axios from 'axios';
 
@@ -27,11 +27,49 @@ function Home({ navigation }) {
         password: '',
     }
 
+    // initial login state type declaration
+    const loggedInInit: {
+        email: string,
+        id: number,
+        username: string,
+    } = {
+        email: '',
+        id: 0,
+        username: '',
+    }
+
     // state variables for showing/closing sign up and login modals and sign up and login inputs
     const [signUpInput, setSignUpInput] = useState(signUpInit);
     const [loginInput, setloginInput] = useState(logInInit);
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
+
+    // state variable to check for initial login state
+    const [loggedIn, setLoggedIn] = useState<boolean>(localStorage.getItem('token') ? true : false);
+
+    // state variable to store login information
+    const [user, setUser] = useState(loggedInInit);
+
+    // function to get user info if already logged in
+    const getUserInfo = async (): Promise<void> => {
+        try {
+            const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${localStorage.getItem('token')}` } });
+            console.log(res);
+            const status: number = res.status;
+            if (status === 200) {
+                setUser(res.data);
+                console.log(res.data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        if (loggedIn) {
+            getUserInfo();
+        }
+    }, [loggedIn]);
 
     // handle change function for sign up request
     const handleSignUpChange = (event, key: string) => {
@@ -122,6 +160,7 @@ function Home({ navigation }) {
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
+            <Text>{user.username}</Text>
             {/* pressables to show either sign up or login modal */}
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
