@@ -40,8 +40,8 @@ function Home({ navigation }) {
     }
 
     // handle change function for login request
-    const handleLoginChange = (event) => {
-        setloginInput(event.target.value);
+    const handleLoginChange = (event, key: string) => {
+        setloginInput({ ...loginInput, [key]: event.target.value });
     }
 
     // sign up request
@@ -80,7 +80,8 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='login' onChange={handleLoginChange} value={loginInput} />
+                    <TextInput placeholder='email' onChange={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
+                    <TextInput placeholder='password' onChange={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
