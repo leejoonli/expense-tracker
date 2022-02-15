@@ -20,7 +20,7 @@ function Home({ navigation }) {
         re_password: '',
     }
 
-    const [signUpInput, setSignUpInput] = useState<object>(signUpInit);
+    const [signUpInput, setSignUpInput] = useState(signUpInit);
     const [loginInput, setloginInput] = useState<string>('');
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
@@ -56,10 +56,10 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='Username' onChange={handleSignUpChange} value={signUpInput} />
-                    <TextInput placeholder='E-mail' onChange={handleSignUpChange} value={signUpInput} />
-                    <TextInput placeholder='Password' onChange={handleSignUpChange} value={signUpInput} />
-                    <TextInput placeholder='Re Password' onChange={handleSignUpChange} value={signUpInput} />
+                    <TextInput placeholder='Username' onChange={handleSignUpChange} value={signUpInput.username} />
+                    <TextInput placeholder='E-mail' onChange={handleSignUpChange} value={signUpInput.email} />
+                    <TextInput placeholder='Password' onChange={handleSignUpChange} value={signUpInput.password} />
+                    <TextInput placeholder='Re Password' onChange={handleSignUpChange} value={signUpInput.re_password} />
                     <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
