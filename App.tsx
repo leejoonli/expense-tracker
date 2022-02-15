@@ -7,6 +7,7 @@ import Profile from './components/Profile/Profile';
 import Home from './components/Home/Home';
 import test from './components/testcomponent/test';
 import ExpenseDetail from './components/ExpenseDetail/ExpenseDetail';
+import ExpenseEdit from './components/ExpenseEdit/ExpenseEdit';
 import axios from 'axios';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Screen name='Profile' component={Profile} />
         <Stack.Screen name='test' component={test} />
         <Stack.Screen name='ExpenseDetail' component={ExpenseDetail} />
+        <Stack.Screen name='ExpenseEdit' component={ExpenseEdit} />
       </Stack.Navigator>
     </NavigationContainer>
   );

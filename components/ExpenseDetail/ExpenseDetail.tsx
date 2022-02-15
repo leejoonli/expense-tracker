@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import axios from 'axios';
 
 // set types for props
@@ -32,7 +32,7 @@ function ExpenseDetail({ navigation, route }) {
     // state variable to store expense detail
     const [expense, setExpense] = useState(init);
 
-    const [test, setTest] = useState<Array<string> | undefined>([]);
+    const [keys, setKeys] = useState<Array<string> | undefined>([]);
 
     // useEffect to use api call
     useEffect(() => {
@@ -53,7 +53,7 @@ function ExpenseDetail({ navigation, route }) {
             const keys: Array<string> = Object.keys(expense).filter((element) => { return element !== 'id' && element !== 'expense_url' && element !== 'owner' });
             // console.log(keys);
             // set state to array of keys
-            setTest(keys);
+            setKeys(keys);
         } catch (error) {
             console.log(error)
         }
@@ -62,24 +62,13 @@ function ExpenseDetail({ navigation, route }) {
     // console.log(route)
     return (
         <View>
-            {/* <Text>
-                {expense.name}
-            </Text>
-            <Text>
-                ${expense.amount}
-            </Text>
-            <Text>
-                {expense.category}
-            </Text>
-            <Text>
-                {expense.date}
-            </Text> */}
             {/* need to fix this typing issue */}
-            {test.map((element, index) => {
+            {keys && keys.map((element, index) => {
                 return (
                     <Text key={`${index}`}>{expense[element]}</Text>
                 )
             })}
+            <Pressable onPress={() => navigation.navigate('ExpenseEdit', { expense: expense })} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
         </View>
     );
 }
