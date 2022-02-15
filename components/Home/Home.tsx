@@ -54,11 +54,15 @@ function Home({ navigation }) {
     const getUserInfo = async (): Promise<void> => {
         try {
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${localStorage.getItem('token')}` } });
-            console.log(res);
+            // console.log(res);
             const status: number = res.status;
             if (status === 200) {
                 setUser(res.data);
-                console.log(res.data);
+                // console.log(user);
+            }
+            else {
+                setLoggedIn(false);
+                setUser(loggedInInit);
             }
         } catch (error) {
             console.log(error);
@@ -100,6 +104,7 @@ function Home({ navigation }) {
             if (status === 200) {
                 localStorage.setItem('token', res.data.auth_token);
                 setLoginModal(!loginModal);
+                setLoggedIn(true);
             }
         } catch (error) {
             // error logging
@@ -118,6 +123,7 @@ function Home({ navigation }) {
             const status: number = res.status;
             if (status === 204) {
                 localStorage.clear();
+                setLoggedIn(false);
                 // console.log('token destroyed');
             }
         } catch (error) {
@@ -160,7 +166,7 @@ function Home({ navigation }) {
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
-            <Text>{user.username}</Text>
+            {loggedIn && <Text>{user.username}</Text>}
             {/* pressables to show either sign up or login modal */}
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
