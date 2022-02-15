@@ -53,22 +53,25 @@ function Home({ navigation }) {
     // function to get user info if already logged in
     const getUserInfo = async (): Promise<void> => {
         try {
+            // GET request to retrieve current logged in user's information
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${localStorage.getItem('token')}` } });
-            // console.log(res);
             const status: number = res.status;
             if (status === 200) {
+                // set response data to user state variable
                 setUser(res.data);
-                // console.log(user);
             }
             else {
+                // conditional to check if no user currently logged in
                 setLoggedIn(false);
                 setUser(loggedInInit);
             }
         } catch (error) {
+            // error logging
             console.log(error);
         }
     }
 
+    // useEffect to check to see if user is already logged in
     useEffect(() => {
         if (loggedIn) {
             getUserInfo();
@@ -89,7 +92,6 @@ function Home({ navigation }) {
     const handleSignUpSubmit = async (): Promise<void> => {
         try {
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/users/`, signUpInput);
-            // console.log(res);
             const status: number = res.status;
             if (status === 201) {
                 setUser(res.data);
@@ -104,10 +106,11 @@ function Home({ navigation }) {
         try {
             // post request to get auth token
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput);
-            // console.log(res);
             const status: number = res.status;
             if (status === 200) {
+                // set auth token in local storage
                 localStorage.setItem('token', res.data.auth_token);
+                // close login modal and set logged in to true
                 setLoginModal(!loginModal);
                 setLoggedIn(true);
             }
@@ -124,12 +127,11 @@ function Home({ navigation }) {
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, localStorage.getItem('token'), {
                 headers: { Authorization: `Token ${localStorage.getItem('token')}` }
             });
-            // if status is 204 clear local storage
             const status: number = res.status;
             if (status === 204) {
+                // clear local storage and set logged in to false
                 localStorage.clear();
                 setLoggedIn(false);
-                // console.log('token destroyed');
             }
         } catch (error) {
             // error logging
@@ -172,7 +174,7 @@ function Home({ navigation }) {
                 </View>
             </Modal>
             {loggedIn && <Text>{user.username}</Text>}
-            {/* pressables to show either sign up or login modal */}
+            {/* pressables to show either sign up or login modal, or to logout */}
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
             <Pressable onPress={handleLogout}><Text>log out</Text></Pressable>

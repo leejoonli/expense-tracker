@@ -46,7 +46,6 @@ function ExpenseDetail({ navigation, route }) {
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/${id}`);
             // store data from response to variable
             const data = res.data;
-            // console.log(data)
             // set state to response data
             setExpense(data);
             // turn object keys into array of strings and filter out the ones not to display
