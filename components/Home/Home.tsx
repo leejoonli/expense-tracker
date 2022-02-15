@@ -66,6 +66,20 @@ function Home({ navigation }) {
     }
 
     // logout request
+    const handleLogout = async () => {
+        try {
+            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, localStorage.getItem('token'), {
+                headers: { Authorization: `Token ${localStorage.getItem('token')}` }
+            });
+            const status: number = res.status;
+            if (status === 204) {
+                localStorage.clear();
+                console.log('token destroyed');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // render a sign up or login screen depending on state
     return (
@@ -106,7 +120,7 @@ function Home({ navigation }) {
             </Modal>
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
-            <Pressable onPress={() => console.log('logout')}><Text>log out</Text></Pressable>
+            <Pressable onPress={handleLogout}><Text>log out</Text></Pressable>
         </View>
     );
 }
