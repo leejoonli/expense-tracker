@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 // home component will be the login screen
@@ -44,8 +45,23 @@ function Home({ navigation }) {
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
+    // const getData = async (): Promise<boolean> => {
+    //     try {
+    //         const value = await AsyncStorage.getItem('token');
+    //         if (!value) {
+    //             return false;
+    //         }
+    //         else {
+    //             return true;
+    //         }
+    //     } catch (error) {
+    //         // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
+    //         throw (error);
+    //     }
+    // }
+
     // state variable to check for initial login state
-    const [loggedIn, setLoggedIn] = useState<boolean>(localStorage.getItem('token') ? true : false);
+    const [loggedIn, setLoggedIn] = useState();
 
     // state variable to store login information
     const [user, setUser] = useState(loggedInInit);
