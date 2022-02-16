@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // need to find types for props that are currently listed
-function Profile({ navigation, route }) {
+function Profile({ navigation, route }: any) {
     // interface for data from api call
     interface Data {
         id: number,

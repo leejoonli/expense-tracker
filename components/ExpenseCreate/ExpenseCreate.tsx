@@ -3,7 +3,7 @@ import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-function ExpenseCreate({ navigation, route }) {
+function ExpenseCreate({ navigation, route }: any) {
     // initial state for createExpense
     const createInit: {
         name: string,
@@ -21,10 +21,10 @@ function ExpenseCreate({ navigation, route }) {
     const [createExpense, setCreateExpense] = useState(createInit);
 
     // POST request to add new expense to database
-    const handleSubmit = async () => {
+    const handleSubmit = async (): Promise<void> => {
         try {
             // get token from async storage
-            const token = await AsyncStorage.getItem('token');
+            const token: string | null = await AsyncStorage.getItem('token');
             // POST request to create new expense to database
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/expenses/`, createExpense, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
@@ -44,7 +44,7 @@ function ExpenseCreate({ navigation, route }) {
     }
 
     // on change handler for textinputs
-    const handleChange = (event, key: string | number) => {
+    const handleChange = (event: string, key: string) => {
         setCreateExpense({ ...createExpense, [key]: event });
     }
 

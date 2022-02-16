@@ -47,7 +47,7 @@ function Home({ navigation }: any) {
 
     const getData = async (): Promise<boolean | undefined> => {
         try {
-            const value = await AsyncStorage.getItem('token');
+            const value: string | null = await AsyncStorage.getItem('token');
             if (!value) {
                 setLoggedIn(false);
             }
@@ -71,7 +71,7 @@ function Home({ navigation }: any) {
     const getUserInfo = async (): Promise<void> => {
         try {
             // grab token from async storage
-            const token = await AsyncStorage.getItem('token');
+            const token: string | null = await AsyncStorage.getItem('token');
             // GET request to retrieve current logged in user's information
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
