@@ -18,15 +18,20 @@ function ExpenseEdit({ navigation, route }) {
     // onsubmit function
     const handleEditSubmit = async () => {
         try {
+            // get token from async storage
             const token = await AsyncStorage.getItem('token');
+            // PUT request for editing data
             const res = await axios.put(`https://salty-eyrie-01871.herokuapp.com/expenses/${expense.id}`, editExpense, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
             if (status === 200) {
                 // console.log('hello world')
-                alert('expense changed')
-                navigation.navigate('ExpenseDetail', { id: editExpense.id })
+                // using alert for now to notify user that an expense has been updated
+                alert('expense changed');
+                // navigate to expense detail
+                navigation.navigate('ExpenseDetail', { id: editExpense.id });
             }
         } catch (error) {
+            // error logging
             console.log(error);
         }
     }
