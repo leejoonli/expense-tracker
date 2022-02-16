@@ -3,23 +3,34 @@ import { Text, Button, View, TextInput, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-function ExpenseEdit({ navigation, route }) {
+function ExpenseEdit({ navigation, route }: any) {
+    // interface for expense
+    interface Data {
+        id: number,
+        name: string,
+        amount: number,
+        category: string,
+        date: string,
+        expense_url: string,
+        owner: string,
+    }
+
     // get expense object from route.params
-    const expense = route.params.expense;
+    const expense: Data = route.params.expense;
 
     // set state variable to expense variable listed above
     const [editExpense, setEditExpense] = useState(expense);
 
     // onchange handle function
-    const handleExpenseChange = (event, key: string | number) => {
+    const handleExpenseChange = (event: string, key: string | number) => {
         setEditExpense({ ...editExpense, [key]: event });
     }
 
     // onsubmit function
-    const handleEditSubmit = async () => {
+    const handleEditSubmit = async (): Promise<void> => {
         try {
             // get token from async storage
-            const token = await AsyncStorage.getItem('token');
+            const token: string | null = await AsyncStorage.getItem('token');
             // PUT request for editing data
             const res = await axios.put(`https://salty-eyrie-01871.herokuapp.com/expenses/${expense.id}`, editExpense, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
@@ -30,7 +41,7 @@ function ExpenseEdit({ navigation, route }) {
                 // navigate to expense detail
                 navigation.popToTop();
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
