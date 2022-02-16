@@ -72,6 +72,7 @@ function Home({ navigation }) {
     // function to get user info if already logged in
     const getUserInfo = async (): Promise<void> => {
         try {
+            // grab token from async storage
             const token = await AsyncStorage.getItem('token');
             // GET request to retrieve current logged in user's information
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${token}` } });
@@ -122,6 +123,7 @@ function Home({ navigation }) {
                 setSignUpModal(false);
             }
         } catch (error) {
+            // error logging
             console.log(error);
         }
     }
@@ -129,6 +131,7 @@ function Home({ navigation }) {
     // login request
     const handleLoginSubmit = async (): Promise<void> => {
         try {
+            // don't know why this has a headers object in it but leaving it for now
             const res: Response = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput, {
                 headers: {
                     'Content-Type': 'application/json',

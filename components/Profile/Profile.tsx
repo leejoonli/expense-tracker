@@ -31,6 +31,8 @@ function Profile({ navigation, route }) {
 
     const getData = async (): Promise<void> => {
         try {
+            // https://stackoverflow.com/questions/26906630/django-rest-framework-authentication-credentials-were-not-provided
+            // get the token from async storage and send it with GET request
             const token = await AsyncStorage.getItem('token');
             // make axios api call to heroku app
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/`, { headers: { Authorization: `Token ${token}` } });
