@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Button, View, TextInput } from 'react-native';
+import { Text, Button, View, TextInput, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 function ExpenseEdit({ navigation, route }) {
     // get expense object from route.params
@@ -14,6 +16,19 @@ function ExpenseEdit({ navigation, route }) {
     }
 
     // onsubmit function
+    const handleEditSubmit = async () => {
+        try {
+            const token = await AsyncStorage.getItem('token');
+            const res = await axios.put(`https://salty-eyrie-01871.herokuapp.com/expenses/${expense.id}`, editExpense, { headers: { Authorization: `Token ${token}` } });
+            const status: number = res.status;
+            if (status === 200) {
+                // console.log('hello world')
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // api post request
 
     return (
@@ -22,6 +37,7 @@ function ExpenseEdit({ navigation, route }) {
             <TextInput placeholder='Amount' onChangeText={(event) => handleExpenseChange(event, 'amount')} value={editExpense.amount} />
             <TextInput placeholder='Category' onChangeText={(event) => handleExpenseChange(event, 'category')} value={editExpense.category} />
             <TextInput placeholder='Date' onChangeText={(event) => handleExpenseChange(event, 'date')} value={editExpense.date} />
+            <Pressable onPress={handleEditSubmit}><Text>submit edit</Text></Pressable>
         </View>
     );
 }
