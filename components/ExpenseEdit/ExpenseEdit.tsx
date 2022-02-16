@@ -28,7 +28,7 @@ function ExpenseEdit({ navigation, route }) {
                 // using alert for now to notify user that an expense has been updated
                 alert('expense changed');
                 // navigate to expense detail
-                navigation.navigate('ExpenseDetail', { id: editExpense.id });
+                navigation.popToTop();
             }
         } catch (error) {
             // error logging

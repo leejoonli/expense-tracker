@@ -21,7 +21,7 @@ function Profile({ navigation, route }) {
     // set list of expenses state to init variable
     const [expenses, setExpenses] = useState(init);
 
-    // test for text input
+    // test for text input <-GET RID OF LATER
     const [text, setText] = useState('');
 
     // useEffect to make api call to fetch data
@@ -77,9 +77,9 @@ function Profile({ navigation, route }) {
                 <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
                 <Pressable onPress={() => navigation.navigate('ExpenseDetail')}><Text>Go to expense detail</Text></Pressable>
                 <StatusBar style="auto" />
-                <Text>
+                {/* <Text>
                     hello from {route.params.name}
-                </Text>
+                </Text> */}
             </View>
         </View>
     );
