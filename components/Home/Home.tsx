@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // home component will be the login screen
 // set types for props
-function Home({ navigation }) {
+function Home({ navigation }: any) {
     // sign up init type declaration
     const signUpInit: {
         email: string,
@@ -99,12 +99,12 @@ function Home({ navigation }) {
     }, [loggedIn]);
 
     // handle change function for sign up request
-    const handleSignUpChange = (event, key: string) => {
+    const handleSignUpChange = (event: string, key: string) => {
         setSignUpInput({ ...signUpInput, [key]: event });
     }
 
     // handle change function for login request
-    const handleLoginChange = (event, key: string) => {
+    const handleLoginChange = (event: string, key: string) => {
         setloginInput({ ...loginInput, [key]: event });
     }
 
@@ -130,7 +130,7 @@ function Home({ navigation }) {
     const handleLoginSubmit = async (): Promise<void> => {
         try {
             // don't know why this has a headers object in it but leaving it for now
-            const res: Response = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput, {
+            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
