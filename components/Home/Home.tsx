@@ -82,10 +82,12 @@ function Home({ navigation }) {
     // function to get user info if already logged in
     const getUserInfo = async (): Promise<void> => {
         try {
+            const token = await AsyncStorage.getItem('token');
             // GET request to retrieve current logged in user's information
-            const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${localStorage.getItem('token')}` } });
+            const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
             if (status === 200) {
+                console.log('hello world', res.data);
                 // set response data to user state variable
                 setUser(res.data);
             }
