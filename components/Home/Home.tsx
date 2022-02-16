@@ -112,12 +112,13 @@ function Home({ navigation }) {
     // sign up request
     const handleSignUpSubmit = async (): Promise<void> => {
         try {
+            // POST request to sign up as a user
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/users/`, signUpInput);
-            // console.log(res.status)
             const status: number = res.status;
             if (status === 201) {
-                // console.log(res.data);
-                setUser(res.data);
+                // set response data to user state variable
+                // setUser(res.data);
+                // close sign up modal
                 setSignUpModal(false);
             }
         } catch (error) {
