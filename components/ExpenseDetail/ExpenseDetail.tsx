@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Pressable, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import axios from 'axios';
 
 // set types for props
@@ -61,7 +61,7 @@ function ExpenseDetail({ navigation, route }) {
 
     // console.log(route)
     return (
-        <ScrollView>
+        <View>
             {/* need to fix this typing issue */}
             {keys && keys.map((element, index) => {
                 return (
@@ -69,7 +69,7 @@ function ExpenseDetail({ navigation, route }) {
                 )
             })}
             <Pressable onPress={() => navigation.navigate('ExpenseEdit', { expense: expense })} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
-        </ScrollView>
+        </View>
     );
 }
 
