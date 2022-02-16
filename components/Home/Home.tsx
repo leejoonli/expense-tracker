@@ -45,26 +45,24 @@ function Home({ navigation }) {
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
-    // const [bool, setBool] = useState(false);
-
-    // const getData = async (): Promise<boolean | undefined> => {
-    //     try {
-    //         const value = await AsyncStorage.getItem('token');
-    //         if (!value) {
-    //             setLoggedIn(false);
-    //         }
-    //         else {
-    //             setLoggedIn(true);
-    //         }
-    //         return;
-    //     } catch (error) {
-    //         // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
-    //         throw (error);
-    //     }
-    // }
+    const getData = async (): Promise<boolean | undefined> => {
+        try {
+            const value = await AsyncStorage.getItem('token');
+            if (!value) {
+                setLoggedIn(false);
+            }
+            else {
+                setLoggedIn(true);
+            }
+            return;
+        } catch (error) {
+            // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
+            throw (error);
+        }
+    }
 
     // state variable to check for initial login state
-    const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const [loggedIn, setLoggedIn] = useState<boolean>();
 
     // state variable to store login information
     const [user, setUser] = useState(loggedInInit);
@@ -83,7 +81,7 @@ function Home({ navigation }) {
             }
             else {
                 // conditional to check if no user currently logged in
-                // setLoggedIn(bool);
+                setLoggedIn(true);
                 setUser(loggedInInit);
             }
         } catch (error) {
@@ -94,7 +92,7 @@ function Home({ navigation }) {
 
     // useEffect to check to see if user is already logged in
     useEffect(() => {
-        // getData();
+        getData();
         if (loggedIn) {
             getUserInfo();
         }
@@ -144,8 +142,6 @@ function Home({ navigation }) {
                 await AsyncStorage.setItem('token', res.data.auth_token);
                 // close login modal and set logged in to true
                 setLoginModal(!loginModal);
-                // await setLoggedIn(true);
-                // await getData();
                 setLoggedIn(true);
             }
         } catch (error) {
