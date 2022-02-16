@@ -45,36 +45,26 @@ function Home({ navigation }) {
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
-    const [bool, setBool] = useState(false);
+    // const [bool, setBool] = useState(false);
 
-    // const test = async () => {
+    // const getData = async (): Promise<boolean | undefined> => {
     //     try {
-    //         const val = await AsyncStorage.setItem('test', 'hello world');
+    //         const value = await AsyncStorage.getItem('token');
+    //         if (!value) {
+    //             setLoggedIn(false);
+    //         }
+    //         else {
+    //             setLoggedIn(true);
+    //         }
+    //         return;
     //     } catch (error) {
-    //         console.log(error);
+    //         // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
+    //         throw (error);
     //     }
     // }
-    // test();
-
-    const getData = async (): Promise<boolean | undefined> => {
-        // return await AsyncStorage.getItem('token');
-        try {
-            const value = await AsyncStorage.getItem('token');
-            if (!value) {
-                setBool(false);
-            }
-            else {
-                setBool(true);
-            }
-            return;
-        } catch (error) {
-            // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
-            throw (error);
-        }
-    }
 
     // state variable to check for initial login state
-    const [loggedIn, setLoggedIn] = useState<boolean>(bool);
+    const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
     // state variable to store login information
     const [user, setUser] = useState(loggedInInit);
@@ -87,13 +77,12 @@ function Home({ navigation }) {
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
             if (status === 200) {
-                console.log('hello world', res.data);
                 // set response data to user state variable
                 setUser(res.data);
             }
             else {
                 // conditional to check if no user currently logged in
-                setLoggedIn(bool);
+                // setLoggedIn(bool);
                 setUser(loggedInInit);
             }
         } catch (error) {
@@ -104,6 +93,7 @@ function Home({ navigation }) {
 
     // useEffect to check to see if user is already logged in
     useEffect(() => {
+        // getData();
         if (loggedIn) {
             getUserInfo();
         }
@@ -115,7 +105,7 @@ function Home({ navigation }) {
     }
 
     // handle change function for login request
-    const handleLoginChange = (event, key: string) => {
+    const handleLoginChange = (event: Event, key: string) => {
         setloginInput({ ...loginInput, [key]: event });
     }
 
@@ -148,7 +138,7 @@ function Home({ navigation }) {
                 // close login modal and set logged in to true
                 setLoginModal(!loginModal);
                 // await setLoggedIn(true);
-                await getData();
+                // await getData();
                 setLoggedIn(true);
             }
         } catch (error) {
@@ -161,16 +151,15 @@ function Home({ navigation }) {
     const handleLogout = async (): Promise<void> => {
         try {
             // variable for async storage
-            const val = await AsyncStorage.getItem('token');
-            // console.log(val);
+            const token = await AsyncStorage.getItem('token');
             // post request to destroy auth token
-            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, val, {
-                headers: { Authorization: `Token ${val}` }
+            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, token, {
+                headers: { Authorization: `Token ${token}` }
             });
             const status: number = res.status;
             if (status === 204) {
                 // clear local storage and set logged in to false
-                localStorage.clear();
+                await AsyncStorage.clear();
                 setLoggedIn(false);
             }
         } catch (error) {
