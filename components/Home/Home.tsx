@@ -45,23 +45,36 @@ function Home({ navigation }) {
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
-    // const getData = async (): Promise<boolean> => {
+    const [bool, setBool] = useState(false);
+
+    // const test = async () => {
     //     try {
-    //         const value = await AsyncStorage.getItem('token');
-    //         if (!value) {
-    //             return false;
-    //         }
-    //         else {
-    //             return true;
-    //         }
+    //         const val = await AsyncStorage.setItem('test', 'hello world');
     //     } catch (error) {
-    //         // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
-    //         throw (error);
+    //         console.log(error);
     //     }
     // }
+    // test();
+
+    const getData = async (): Promise<boolean | undefined> => {
+        // return await AsyncStorage.getItem('token');
+        try {
+            const value = await AsyncStorage.getItem('token');
+            if (!value) {
+                setBool(false);
+            }
+            else {
+                setBool(true);
+            }
+            return;
+        } catch (error) {
+            // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
+            throw (error);
+        }
+    }
 
     // state variable to check for initial login state
-    const [loggedIn, setLoggedIn] = useState();
+    const [loggedIn, setLoggedIn] = useState<boolean>(bool);
 
     // state variable to store login information
     const [user, setUser] = useState(loggedInInit);
@@ -78,7 +91,7 @@ function Home({ navigation }) {
             }
             else {
                 // conditional to check if no user currently logged in
-                setLoggedIn(false);
+                setLoggedIn(bool);
                 setUser(loggedInInit);
             }
         } catch (error) {
@@ -125,10 +138,10 @@ function Home({ navigation }) {
             const status: number = res.status;
             if (status === 200) {
                 // set auth token in local storage
-                localStorage.setItem('token', res.data.auth_token);
+                await AsyncStorage.setItem('token', res.data.auth_token);
                 // close login modal and set logged in to true
                 setLoginModal(!loginModal);
-                setLoggedIn(true);
+                setLoggedIn(bool);
             }
         } catch (error) {
             // error logging
@@ -139,9 +152,12 @@ function Home({ navigation }) {
     // logout request
     const handleLogout = async (): Promise<void> => {
         try {
+            // variable for async storage
+            const val = await AsyncStorage.getItem('token');
+            // console.log(val);
             // post request to destroy auth token
-            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, localStorage.getItem('token'), {
-                headers: { Authorization: `Token ${localStorage.getItem('token')}` }
+            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, val, {
+                headers: { Authorization: `Token ${val}` }
             });
             const status: number = res.status;
             if (status === 204) {
