@@ -69,6 +69,7 @@ function ExpenseDetail({ navigation, route }) {
                 )
             })}
             <Pressable onPress={() => navigation.navigate('ExpenseEdit', { expense: expense })} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
+            <Pressable onPress={() => console.log('delete')} style={{ backgroundColor: 'aqua' }}><Text>Delete</Text></Pressable>
         </View>
     );
 }
