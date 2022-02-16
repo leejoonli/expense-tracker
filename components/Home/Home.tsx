@@ -114,7 +114,7 @@ function Home({ navigation }) {
 
     // handle change function for login request
     const handleLoginChange = (event, key: string) => {
-        setloginInput({ ...loginInput, [key]: event.target.value });
+        setloginInput({ ...loginInput, [key]: event });
     }
 
     // sign up request
@@ -133,15 +133,21 @@ function Home({ navigation }) {
     // login request
     const handleLoginSubmit = async (): Promise<void> => {
         try {
-            // post request to get auth token
-            const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput);
+            const res: Response = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/login`, loginInput, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
             const status: number = res.status;
             if (status === 200) {
                 // set auth token in local storage
+                // console.log(res);
                 await AsyncStorage.setItem('token', res.data.auth_token);
                 // close login modal and set logged in to true
                 setLoginModal(!loginModal);
-                setLoggedIn(bool);
+                // await setLoggedIn(true);
+                await getData();
+                setLoggedIn(true);
             }
         } catch (error) {
             // error logging
@@ -199,8 +205,8 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='email' onChange={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
-                    <TextInput placeholder='password' onChange={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
+                    <TextInput placeholder='email' onChangeText={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
+                    <TextInput placeholder='password' onChangeText={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
                     <Pressable onPress={handleLoginSubmit}><Text>log in</Text></Pressable>
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
@@ -210,6 +216,7 @@ function Home({ navigation }) {
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
             <Pressable onPress={handleLogout}><Text>log out</Text></Pressable>
+            <Button title='go to profile' onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} />
         </View>
     );
 }
