@@ -25,12 +25,15 @@ function ExpenseCreate({ navigation, route }) {
         try {
             // get token from async storage
             const token = await AsyncStorage.getItem('token');
+            // POST request to create new expense to database
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/expenses/`, createExpense, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
             if (status === 201) {
-                console.log('hello world');
+                // set create expense state variable to initial state
                 setCreateExpense(createInit);
+                // using alert for now to notify user of new expense created
                 alert('you created a new expense');
+                // navigate to Profile
                 navigation.navigate('Profile', { name: 'Lulu' });
             }
         } catch (error) {
