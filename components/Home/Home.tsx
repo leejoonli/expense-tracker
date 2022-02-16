@@ -105,7 +105,7 @@ function Home({ navigation }) {
     }
 
     // handle change function for login request
-    const handleLoginChange = (event: Event, key: string) => {
+    const handleLoginChange = (event, key: string) => {
         setloginInput({ ...loginInput, [key]: event });
     }
 
@@ -207,7 +207,7 @@ function Home({ navigation }) {
             <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
             <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
             <Pressable onPress={handleLogout}><Text>log out</Text></Pressable>
-            <Button title='go to profile' onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} />
+            {loggedIn && <Button title='go to profile' onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} />}
         </View>
     );
 }
