@@ -7,12 +7,12 @@ function ExpenseCreate({ navigation, route }) {
     // initial state for createExpense
     const createInit: {
         name: string,
-        amount: string,
+        amount: number,
         category: string,
         date: string,
     } = {
         name: '',
-        amount: '',
+        amount: 0,
         category: '',
         date: '',
     }
@@ -43,14 +43,14 @@ function ExpenseCreate({ navigation, route }) {
     }
 
     // on change handler for textinputs
-    const handleChange = (event, key: string) => {
+    const handleChange = (event, key: string | number) => {
         setCreateExpense({ ...createExpense, [key]: event });
     }
 
     return (
         <View>
             <TextInput placeholder='Name' onChangeText={(event) => handleChange(event, 'name')} value={createExpense.name} />
-            <TextInput placeholder='Amount' onChangeText={(event) => handleChange(event, 'amount')} value={createExpense.amount} />
+            <TextInput placeholder='Amount' keyboardType='numeric' onChangeText={(event) => handleChange(event, 'amount')} value={createExpense.amount.toString()} />
             <TextInput placeholder='Category' onChangeText={(event) => handleChange(event, 'category')} value={createExpense.category} />
             <TextInput placeholder='Date' onChangeText={(event) => handleChange(event, 'date')} value={createExpense.date} />
             <Pressable onPress={handleSubmit} style={{ backgroundColor: 'lemonchiffon' }}><Text>create</Text></Pressable>
