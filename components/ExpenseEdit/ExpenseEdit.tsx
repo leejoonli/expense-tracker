@@ -36,15 +36,13 @@ function ExpenseEdit({ navigation, route }) {
         }
     }
 
-    // api post request
-
     return (
         <View>
             <TextInput placeholder='Name' onChangeText={(event) => handleExpenseChange(event, 'name')} value={editExpense.name} />
             <TextInput placeholder='Amount' onChangeText={(event) => handleExpenseChange(event, 'amount')} value={editExpense.amount} />
             <TextInput placeholder='Category' onChangeText={(event) => handleExpenseChange(event, 'category')} value={editExpense.category} />
             <TextInput placeholder='Date' onChangeText={(event) => handleExpenseChange(event, 'date')} value={editExpense.date} />
-            <Pressable onPress={handleEditSubmit}><Text>submit edit</Text></Pressable>
+            <Pressable onPress={handleEditSubmit} style={{ backgroundColor: 'lemonchiffon' }}><Text>submit edit</Text></Pressable>
         </View>
     );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 // set types for props
@@ -39,7 +40,7 @@ function ExpenseDetail({ navigation, route }) {
         getData(id);
     }, [id]);
 
-    // api call function to get single expense.  Put Promise<void> because the function isn't returning anything and its a promise based function
+    // api call function to get single expense.  Put Promise<void> because the function isn't returning anything and its a promise based function.  It works for now.
     const getData = async (id: number): Promise<void> => {
         try {
             // add typings for variables and axios http request
@@ -59,7 +60,24 @@ function ExpenseDetail({ navigation, route }) {
         }
     }
 
-    // console.log(route)
+    // delete function to remove data from database
+    const handleDelete = async () => {
+        try {
+            // get token from async storage
+            const token = await AsyncStorage.getItem('token');
+            // DELETE request to remove data from database
+            const res = await axios.delete(`https://salty-eyrie-01871.herokuapp.com/expenses/${id}`, { headers: { Authorization: `Token ${token}` } });
+            const status: number = res.status;
+            if (status === 204) {
+                alert('expense deleted');
+                navigation.navigate('Profile', { name: 'Lulu' });
+            }
+        } catch (error) {
+            // error logging
+            console.log(error);
+        }
+    }
+
     return (
         <View>
             {/* need to fix this typing issue */}
@@ -69,7 +87,7 @@ function ExpenseDetail({ navigation, route }) {
                 )
             })}
             <Pressable onPress={() => navigation.navigate('ExpenseEdit', { expense: expense })} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
-            <Pressable onPress={() => console.log('delete')} style={{ backgroundColor: 'aqua' }}><Text>Delete</Text></Pressable>
+            <Pressable onPress={handleDelete} style={{ backgroundColor: 'aqua' }}><Text>Delete</Text></Pressable>
         </View>
     );
 }
