@@ -37,7 +37,7 @@ function ExpenseCreate({ navigation, route }: any) {
                 // navigation.navigate('Profile', { name: 'Lulu' });
                 navigation.popToTop();
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }

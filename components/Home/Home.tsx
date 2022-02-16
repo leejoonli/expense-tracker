@@ -6,6 +6,16 @@ import axios from 'axios';
 // home component will be the login screen
 // set types for props
 function Home({ navigation }: any) {
+    // interface for api call response but got type error so leaving it commented out
+    // interface Res {
+    //     config: object,
+    //     data: object,
+    //     headers: object,
+    //     request: XMLHttpRequest
+    //     status: number,
+    //     statusText: string,
+    // }
+
     // sign up init type declaration
     const signUpInit: {
         email: string,
@@ -55,7 +65,7 @@ function Home({ navigation }: any) {
                 setLoggedIn(true);
             }
             return;
-        } catch (error) {
+        } catch (error: any) {
             // https://stackoverflow.com/questions/54812453/function-lacks-ending-return-statement-and-return-type-does-not-include-undefin
             throw (error);
         }
@@ -74,6 +84,7 @@ function Home({ navigation }: any) {
             const token: string | null = await AsyncStorage.getItem('token');
             // GET request to retrieve current logged in user's information
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${token}` } });
+            console.log(res)
             const status: number = res.status;
             if (status === 200) {
                 // set response data to user state variable
@@ -84,7 +95,7 @@ function Home({ navigation }: any) {
                 setLoggedIn(true);
                 setUser(loggedInInit);
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
@@ -99,12 +110,12 @@ function Home({ navigation }: any) {
     }, [loggedIn]);
 
     // handle change function for sign up request
-    const handleSignUpChange = (event: string, key: string) => {
+    const handleSignUpChange = (event: string, key: string): void => {
         setSignUpInput({ ...signUpInput, [key]: event });
     }
 
     // handle change function for login request
-    const handleLoginChange = (event: string, key: string) => {
+    const handleLoginChange = (event: string, key: string): void => {
         setloginInput({ ...loginInput, [key]: event });
     }
 
@@ -120,7 +131,7 @@ function Home({ navigation }: any) {
                 // close sign up modal
                 setSignUpModal(false);
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
@@ -144,7 +155,7 @@ function Home({ navigation }: any) {
                 setLoginModal(!loginModal);
                 setLoggedIn(true);
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
@@ -154,7 +165,7 @@ function Home({ navigation }: any) {
     const handleLogout = async (): Promise<void> => {
         try {
             // variable for async storage
-            const token = await AsyncStorage.getItem('token');
+            const token: string | null = await AsyncStorage.getItem('token');
             // post request to destroy auth token
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/token/logout`, token, {
                 headers: { Authorization: `Token ${token}` }
@@ -165,7 +176,7 @@ function Home({ navigation }: any) {
                 await AsyncStorage.clear();
                 setLoggedIn(false);
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
