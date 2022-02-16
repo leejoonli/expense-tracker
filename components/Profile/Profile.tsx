@@ -58,6 +58,7 @@ function Profile({ navigation, route }) {
 
     return (
         <View style={styles.container}>
+            <Pressable onPress={() => navigation.navigate('ExpenseCreate')} style={{ backgroundColor: 'aqua' }}><Text>Add New Expense</Text></Pressable>
             {expenses && (
                 <FlatList
                     data={expenses}

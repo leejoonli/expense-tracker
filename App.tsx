@@ -8,6 +8,7 @@ import Home from './components/Home/Home';
 import test from './components/testcomponent/test';
 import ExpenseDetail from './components/ExpenseDetail/ExpenseDetail';
 import ExpenseEdit from './components/ExpenseEdit/ExpenseEdit';
+import ExpenseCreate from './components/ExpenseCreate/ExpenseCreate';
 import axios from 'axios';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name='test' component={test} options={{ title: 'test' }} />
         <Stack.Screen name='ExpenseDetail' component={ExpenseDetail} options={{ title: 'Expense Detail' }} />
         <Stack.Screen name='ExpenseEdit' component={ExpenseEdit} options={{ title: 'Expense Edit' }} />
+        <Stack.Screen name='ExpenseCreate' component={ExpenseCreate} options={{ title: 'Expense Create' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
