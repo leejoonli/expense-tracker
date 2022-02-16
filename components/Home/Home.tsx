@@ -101,7 +101,7 @@ function Home({ navigation }) {
 
     // handle change function for sign up request
     const handleSignUpChange = (event, key: string) => {
-        setSignUpInput({ ...signUpInput, [key]: event.target.value });
+        setSignUpInput({ ...signUpInput, [key]: event });
     }
 
     // handle change function for login request
@@ -113,9 +113,12 @@ function Home({ navigation }) {
     const handleSignUpSubmit = async (): Promise<void> => {
         try {
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/users/`, signUpInput);
+            // console.log(res.status)
             const status: number = res.status;
             if (status === 201) {
+                // console.log(res.data);
                 setUser(res.data);
+                setSignUpModal(false);
             }
         } catch (error) {
             console.log(error);
@@ -179,10 +182,10 @@ function Home({ navigation }) {
                 }}
             >
                 <View>
-                    <TextInput placeholder='E-mail' onChange={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
-                    <TextInput placeholder='Username' onChange={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
-                    <TextInput placeholder='Password' onChange={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
-                    <TextInput placeholder='Re Password' onChange={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
+                    <TextInput placeholder='E-mail' onChangeText={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
+                    <TextInput placeholder='Username' onChangeText={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
+                    <TextInput placeholder='Password' onChangeText={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
+                    <TextInput placeholder='Re Password' onChangeText={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
                     <Pressable onPress={handleSignUpSubmit}><Text>submit</Text></Pressable>
                     <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
                 </View>
