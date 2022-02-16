@@ -69,7 +69,9 @@ function ExpenseDetail({ navigation, route }) {
             const res = await axios.delete(`https://salty-eyrie-01871.herokuapp.com/expenses/${id}`, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
             if (status === 204) {
+                // using alert for now to notify user that an expense is deleted
                 alert('expense deleted');
+                // navigate to profile
                 navigation.navigate('Profile', { name: 'Lulu' });
             }
         } catch (error) {

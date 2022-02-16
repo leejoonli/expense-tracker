@@ -41,7 +41,6 @@ function ExpenseCreate({ navigation, route }) {
             console.log(error);
         }
     }
-    // if successful navigate to Profile
 
     // on change handler for textinputs
     const handleChange = (event, key: string) => {

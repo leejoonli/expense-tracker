@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
 import Profile from './components/Profile/Profile';
 import Home from './components/Home/Home';
-import test from './components/testcomponent/test';
 import ExpenseDetail from './components/ExpenseDetail/ExpenseDetail';
 import ExpenseEdit from './components/ExpenseEdit/ExpenseEdit';
 import ExpenseCreate from './components/ExpenseCreate/ExpenseCreate';
@@ -21,7 +20,6 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name='Home' component={Home} options={{ title: 'Welcome' }} />
         <Stack.Screen name='Profile' component={Profile} options={{ title: 'Profile' }} />
-        <Stack.Screen name='test' component={test} options={{ title: 'test' }} />
         <Stack.Screen name='ExpenseDetail' component={ExpenseDetail} options={{ title: 'Expense Detail' }} />
         <Stack.Screen name='ExpenseEdit' component={ExpenseEdit} options={{ title: 'Expense Edit' }} />
         <Stack.Screen name='ExpenseCreate' component={ExpenseCreate} options={{ title: 'Expense Create' }} />

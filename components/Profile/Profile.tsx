@@ -75,7 +75,6 @@ function Profile({ navigation, route }) {
                 <TextInput placeholder='type here' onChange={handleChange} value={text} />
                 {/* <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable> */}
                 <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
-                <Button title='go to test' onPress={() => navigation.navigate('test', { name: 'Lulu' })} />
                 <Pressable onPress={() => navigation.navigate('ExpenseDetail')}><Text>Go to expense detail</Text></Pressable>
                 <StatusBar style="auto" />
                 <Text>
