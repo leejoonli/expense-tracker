@@ -34,7 +34,8 @@ function ExpenseCreate({ navigation, route }) {
                 // using alert for now to notify user of new expense created
                 alert('you created a new expense');
                 // navigate to Profile
-                navigation.navigate('Profile', { name: 'Lulu' });
+                // navigation.navigate('Profile', { name: 'Lulu' });
+                navigation.popToTop();
             }
         } catch (error) {
             // error logging

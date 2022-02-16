@@ -72,7 +72,8 @@ function ExpenseDetail({ navigation, route }) {
                 // using alert for now to notify user that an expense is deleted
                 alert('expense deleted');
                 // navigate to profile
-                navigation.navigate('Profile', { name: 'Lulu' });
+                // navigation.navigate('Profile', { name: 'Lulu' });
+                navigation.popToTop();
             }
         } catch (error) {
             // error logging
