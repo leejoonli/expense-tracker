@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, FlatList, Pressable, Button, NativeSyntheticEvent, TextInputChangeEventData, ScrollView } from 'react-native';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // need to find types for props that are currently listed
 function Profile({ navigation, route }) {
@@ -30,8 +31,9 @@ function Profile({ navigation, route }) {
 
     const getData = async (): Promise<void> => {
         try {
+            const token = await AsyncStorage.getItem('token');
             // make axios api call to heroku app
-            const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/`);
+            const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/`, { headers: { Authorization: `Token ${token}` } });
             // extract data from response
             const data = res.data;
             // set state to data variable
