@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-// set types for props
-function ExpenseDetail({ navigation, route }) {
+// set props to any because I don't know what else to put
+function ExpenseDetail({ navigation, route }: any) {
     // interface for data from api call
     interface Data {
         id: number,

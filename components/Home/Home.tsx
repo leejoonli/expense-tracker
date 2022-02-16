@@ -3,8 +3,7 @@ import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-// home component will be the login screen
-// set types for props
+// set props to any because I don't know what else to put
 function Home({ navigation }: any) {
     // interface for api call response but got type error so leaving it commented out
     // interface Res {

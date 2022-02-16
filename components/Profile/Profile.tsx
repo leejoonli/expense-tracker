@@ -22,7 +22,7 @@ function Profile({ navigation, route }: any) {
     const [expenses, setExpenses] = useState(init);
 
     // test for text input <-GET RID OF LATER
-    const [text, setText] = useState('');
+    // const [text, setText] = useState('');
 
     // useEffect to make api call to fetch data
     useEffect(() => {
@@ -33,7 +33,8 @@ function Profile({ navigation, route }: any) {
         try {
             // https://stackoverflow.com/questions/26906630/django-rest-framework-authentication-credentials-were-not-provided
             // get the token from async storage and send it with GET request
-            const token = await AsyncStorage.getItem('token');
+            const token: string | null = await AsyncStorage.getItem('token');
+            // haven't set response or response data type because I don't know what to put
             // make axios api call to heroku app
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/expenses/`, { headers: { Authorization: `Token ${token}` } });
             // extract data from response
@@ -47,9 +48,9 @@ function Profile({ navigation, route }: any) {
     }
 
     // handle change test for text input.  need to figure out event type
-    const handleChange = (event: any) => {
-        setText(event.target.value);
-    }
+    // const handleChange = (event: any) => {
+    //     setText(event.target.value);
+    // }
 
     // on press test for native pressable core component
     const onPressFunction = () => {
@@ -72,7 +73,7 @@ function Profile({ navigation, route }: any) {
                     )} />)}
             {/* {expenses && (<FlatList data={expenses} style={styles.expenseList} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} />)} */}
             <View style={styles.testContainer}>
-                <TextInput placeholder='type here' onChange={handleChange} value={text} />
+                {/* <TextInput placeholder='type here' onChange={handleChange} value={text} /> */}
                 {/* <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable> */}
                 <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
                 <Pressable onPress={() => navigation.navigate('ExpenseDetail')}><Text>Go to expense detail</Text></Pressable>
