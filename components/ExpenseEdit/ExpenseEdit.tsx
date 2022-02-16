@@ -23,6 +23,8 @@ function ExpenseEdit({ navigation, route }) {
             const status: number = res.status;
             if (status === 200) {
                 // console.log('hello world')
+                alert('expense changed')
+                navigation.navigate('ExpenseDetail', { id: editExpense.id })
             }
         } catch (error) {
             console.log(error);
