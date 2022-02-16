@@ -83,7 +83,6 @@ function Home({ navigation }: any) {
             const token: string | null = await AsyncStorage.getItem('token');
             // GET request to retrieve current logged in user's information
             const res = await axios.get(`https://salty-eyrie-01871.herokuapp.com/users/me`, { headers: { Authorization: `Token ${token}` } });
-            console.log(res)
             const status: number = res.status;
             if (status === 200) {
                 // set response data to user state variable

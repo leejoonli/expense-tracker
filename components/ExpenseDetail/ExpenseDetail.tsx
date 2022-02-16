@@ -17,7 +17,7 @@ function ExpenseDetail({ navigation, route }: any) {
     }
 
     // variable to store id of expense
-    const id = route.params.id;
+    const id: number = route.params.id;
 
     // initial state set to init object with interface Data
     const init: Data = {
@@ -54,14 +54,14 @@ function ExpenseDetail({ navigation, route }: any) {
             // console.log(keys);
             // set state to array of keys
             setKeys(keys);
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
     }
 
     // delete function to remove data from database
-    const handleDelete = async () => {
+    const handleDelete = async (): Promise<void> => {
         try {
             // get token from async storage
             const token = await AsyncStorage.getItem('token');
@@ -75,7 +75,7 @@ function ExpenseDetail({ navigation, route }: any) {
                 // navigation.navigate('Profile', { name: 'Lulu' });
                 navigation.popToTop();
             }
-        } catch (error) {
+        } catch (error: any) {
             // error logging
             console.log(error);
         }
