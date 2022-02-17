@@ -45,11 +45,56 @@ https://docs.github.com/en/repositories/creating-and-managing-repositories/cloni
 
 ## Current Application State
 
-
 ## Future Improvements
 
 ## Contribution Guidelines
 
 ### How to Identify Bugs
+If you identify bugs, submit an issue on the Git repo. Please detail the bug in your issue. If you know how to fix it, feel free to note the methods you would use. You could also submit a pull request with suggested code to fix it.
 
 ## Initial Planning
+
+### Your project idea 
+This application is for expense tracking.  I've read that this kind of project will be good as a first time react-native-app and it can be scaled bigger to add more features.
+
+### Your tech stack (frontend, backend, database)
+Frontend: React, React Native, Typescript
+Backend: Django, Python, SQL, AWS
+
+### List of backend models and their properties
+```js
+class Expense
+    name
+    amount
+    category
+    date
+    owner
+
+class User
+    email
+    avatar
+```
+
+### React component hierarchy (if applicable)
+App
+    Home
+        Daily Expenses
+        Monthly Expenses
+        Expenses by category
+
+### User stories
+MVP
+- As a user, I want to be able to input day to day expenses so I can see how much money I spent.
+- As a user, I want to be able to see what my daily expenses and monthly expenses are.
+- As a user, I want to be able to see my expense details so I can see what I spent my money on.
+
+STRETCH GOALS
+- As a user, I want to be able to log in as a user so my information is saved.
+- As a user, I want to be able to filter expenses based on categories.
+- As a user, I would like my authentication credentials hosted on a database so I can feel more secure about my information.
+- As a user, I would like to be able to delete my login credentials so I can leave the app if I want.
+
+### Wireframes
+![image](https://media.git.generalassemb.ly/user/40293/files/d3e88a00-8ac7-11ec-9399-19f9fc331858)
+![image](https://media.git.generalassemb.ly/user/40293/files/de0a8880-8ac7-11ec-91b3-e7ed7ae1c096)
+![image](https://media.git.generalassemb.ly/user/40293/files/e2cf3c80-8ac7-11ec-90ad-433977492384)
