@@ -68,19 +68,14 @@ function Profile({ navigation, route }: any) {
                         <Pressable onPress={() => navigation.navigate('ExpenseDetail', { id: item.id })} style={styles.pressTest}>
                             <View style={{ backgroundColor: 'lemonchiffon' }}>
                                 <Text>{item.name}</Text>
+                                <Text>{item.amount}</Text>
                             </View>
                         </Pressable>
                     )} />)}
             {/* {expenses && (<FlatList data={expenses} style={styles.expenseList} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} />)} */}
             <View style={styles.testContainer}>
-                {/* <TextInput placeholder='type here' onChange={handleChange} value={text} /> */}
-                {/* <Pressable onPress={onPressFunction}><Text>press me</Text></Pressable> */}
-                <Button onPress={() => { alert('you tapped the button') }} title='press me button' />
                 <Pressable onPress={() => navigation.navigate('ExpenseDetail')}><Text>Go to expense detail</Text></Pressable>
                 <StatusBar style="auto" />
-                {/* <Text>
-                    hello from {route.params.name}
-                </Text> */}
             </View>
         </View>
     );

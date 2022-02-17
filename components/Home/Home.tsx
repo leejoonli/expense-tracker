@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Button, View, Modal, TextInput, Pressable, StyleSheet, Vibration } from 'react-native';
+import { Text, Button, View, Modal, TextInput, Pressable, StyleSheet, Vibration, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -203,7 +203,7 @@ function Home({ navigation }: any) {
                     <TextInput style={styles.formInput} placeholder='Re Password' onChangeText={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
                     <View>
                         <Pressable style={styles.modalPressable} onPress={handleSignUpSubmit}><Text style={styles.pressableText}>Submit</Text></Pressable>
-                        <Pressable style={styles.modalPressable} onPress={() => {
+                        <Pressable style={[styles.modalPressable, styles.modalClose]} onPress={() => {
                             setSignUpModal(!signUpModal);
                             Vibration.vibrate(10);
                         }}><Text style={styles.pressableText}>Close</Text></Pressable>
@@ -224,7 +224,7 @@ function Home({ navigation }: any) {
                     <TextInput style={styles.formInput} placeholder='password' onChangeText={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
                     <View>
                         <Pressable style={styles.modalPressable} onPress={handleLoginSubmit}><Text style={styles.pressableText}>Log In</Text></Pressable>
-                        <Pressable style={[styles.modalPressable, styles.loginClose]} onPress={() => {
+                        <Pressable style={[styles.modalPressable, styles.modalClose]} onPress={() => {
                             setLoginModal(!loginModal);
                             Vibration.vibrate(10);
                         }}><Text style={styles.pressableText}>Close</Text></Pressable>
@@ -246,6 +246,7 @@ function Home({ navigation }: any) {
                 navigation.navigate('Profile');
                 Vibration.vibrate(10);
             }} ><Text style={styles.text}>Go To Profile</Text></Pressable>}
+            <StatusBar style="auto" />
         </View>
     );
 }
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
         padding: 7,
         width: 100,
     },
-    loginClose: {
+    modalClose: {
         marginBottom: 0,
     },
     pressableText: {
