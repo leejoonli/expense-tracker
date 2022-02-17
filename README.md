@@ -19,6 +19,25 @@ https://github.com/leejoonli/expense-tracker-backend
 - React Native Navigation Stack
 - React Native Async Storage
 
+## Viewing Instructions
+
+### Download Expo Go App
+
+You will need to download this application to view it using the QR code reader.
+
+![readme](https://media.git.generalassemb.ly/user/40293/files/f104e780-8ff6-11ec-9b8c-6496562819ba)
+
+### Visit Deployed Application
+
+1. Visit this link: https://expo.dev/@leejoonli/expense-tracker.
+2. Scan the QR code with the Expo Go App.
+3. Use the credentials below if you don't want to go through the sign up process.
+4. Enjoy the application.
+
+| Username | Email | Password |
+|----------|-------|----------|
+| guest2 | guest2@guest2.com | codingiscool|
+
 ## Installation
 
 ### React Native Environment
@@ -32,7 +51,7 @@ https://github.com/leejoonli/expense-tracker-backend
 For more information on React Native Environment go here:
 https://reactnative.dev/docs/environment-setup
 
-### GitHub Installation
+### GitHub Instructions
 1. Open your terminal and navigate to your desired directory where you want to store this repository using `cd YOUR_DIRECTORY_NAME`
 2. On the GitHub repository, click on the "Code" dropdown menu and either click on "HTTPS" or "SSH" depending on what you're using.
 3. You can either click the link which will highlight the GitHub or https link and copy it or click on the icon next to the link which will copy it into your clipboard.
@@ -64,6 +83,7 @@ https://docs.github.com/en/repositories/creating-and-managing-repositories/cloni
 - Improve the expense edit so user doesn't have to input date in specific format.
 - Add more details for each expense.
 - Adjust navigation stack to trigger rerenders and have the most up to date data from api.
+- Deploy to Netlify for possible easier viewing experience.
 
 ## Contribution Guidelines
 
