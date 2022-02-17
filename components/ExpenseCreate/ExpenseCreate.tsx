@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
+import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -49,14 +49,36 @@ function ExpenseCreate({ navigation, route }: any) {
     }
 
     return (
-        <View>
-            <TextInput placeholder='Name' onChangeText={(event) => handleChange(event, 'name')} value={createExpense.name} />
-            <TextInput placeholder='Amount' keyboardType='numeric' onChangeText={(event) => handleChange(event, 'amount')} value={createExpense.amount.toString()} />
-            <TextInput placeholder='Category' onChangeText={(event) => handleChange(event, 'category')} value={createExpense.category} />
-            <TextInput placeholder='Date' onChangeText={(event) => handleChange(event, 'date')} value={createExpense.date} />
-            <Pressable onPress={handleSubmit} style={{ backgroundColor: 'lemonchiffon' }}><Text>create</Text></Pressable>
+        <View style={styles.createContainer}>
+            <TextInput style={styles.input} placeholder='Name' onChangeText={(event) => handleChange(event, 'name')} value={createExpense.name} />
+            <TextInput style={styles.input} placeholder='Amount' keyboardType='numeric' onChangeText={(event) => handleChange(event, 'amount')} value={createExpense.amount.toString()} />
+            <TextInput style={styles.input} placeholder='Category' onChangeText={(event) => handleChange(event, 'category')} value={createExpense.category} />
+            <TextInput style={styles.input} placeholder='Date: Use YYYY-MM-DD Format' onChangeText={(event) => handleChange(event, 'date')} value={createExpense.date} />
+            <Pressable style={styles.pressable} onPress={handleSubmit}><Text style={styles.createText}>Create Expense</Text></Pressable>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    createContainer: {
+        padding: 30,
+        backgroundColor: '#0047bb',
+        margin: 30,
+    },
+    input: {
+        backgroundColor: 'white',
+        color: 'black',
+        paddingLeft: 5,
+        marginBottom: 20,
+    },
+    pressable: {
+        backgroundColor: 'white',
+        padding: 5,
+        width: 150,
+    },
+    createText: {
+        textAlign: 'center',
+    }
+});
 
 export default ExpenseCreate;
