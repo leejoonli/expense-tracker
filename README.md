@@ -58,6 +58,12 @@ https://docs.github.com/en/repositories/creating-and-managing-repositories/cloni
 ![detail](https://media.git.generalassemb.ly/user/40293/files/37e7e280-8fe1-11ec-9f68-c74b3ecc0b47)
 
 ## Future Improvements
+- Add a search bar function to look up expenses.
+- Add a graph section to display expenses on a graph for visual representation.
+- Edit layout to it doesn't look as plain.
+- Improve the expense edit so user doesn't have to input date in specific format.
+- Add more details for each expense.
+- Adjust navigation stack to trigger rerenders and have the most up to date data from api.
 
 ## Contribution Guidelines
 
