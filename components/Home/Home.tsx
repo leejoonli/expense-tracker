@@ -194,17 +194,17 @@ function Home({ navigation }: any) {
                     setSignUpModal(!signUpModal);
                 }}
             >
-                <View>
-                    <TextInput placeholder='E-mail' onChangeText={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
-                    <TextInput placeholder='Username' onChangeText={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
-                    <TextInput placeholder='Password' onChangeText={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
-                    <TextInput placeholder='Re Password' onChangeText={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
-                    <View style={styles.modalPressable}>
-                        <Pressable onPress={handleSignUpSubmit}><Text>submit</Text></Pressable>
-                        <Pressable onPress={() => {
+                <View style={styles.modalContainer}>
+                    <TextInput style={styles.formInput} placeholder='E-mail' onChangeText={(event) => handleSignUpChange(event, 'email')} value={signUpInput.email} />
+                    <TextInput style={styles.formInput} placeholder='Username' onChangeText={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
+                    <TextInput style={styles.formInput} placeholder='Password' onChangeText={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
+                    <TextInput style={styles.formInput} placeholder='Re Password' onChangeText={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
+                    <View>
+                        <Pressable style={styles.modalPressable} onPress={handleSignUpSubmit}><Text style={styles.pressableText}>Submit</Text></Pressable>
+                        <Pressable style={styles.modalPressable} onPress={() => {
                             setSignUpModal(!signUpModal);
                             Vibration.vibrate(10);
-                        }}><Text>close</Text></Pressable>
+                        }}><Text style={styles.pressableText}>Close</Text></Pressable>
                     </View>
                 </View>
             </Modal>
@@ -217,9 +217,9 @@ function Home({ navigation }: any) {
                     setLoginModal(!loginModal);
                 }}
             >
-                <View style={styles.loginContainer}>
-                    <TextInput style={styles.loginFormInput} placeholder='email' onChangeText={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
-                    <TextInput style={styles.loginFormInput} placeholder='password' onChangeText={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
+                <View style={styles.modalContainer}>
+                    <TextInput style={styles.formInput} placeholder='email' onChangeText={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
+                    <TextInput style={styles.formInput} placeholder='password' onChangeText={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
                     <View>
                         <Pressable style={styles.modalPressable} onPress={handleLoginSubmit}><Text style={styles.pressableText}>Log In</Text></Pressable>
                         <Pressable style={[styles.modalPressable, styles.loginClose]} onPress={() => {
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    loginContainer: {
+    modalContainer: {
         marginTop: 50,
         marginLeft: 50,
         marginRight: 50,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#0047bb',
         justifyContent: 'center',
     },
-    loginFormInput: {
+    formInput: {
         padding: 5,
         backgroundColor: 'white',
         color: 'black',
