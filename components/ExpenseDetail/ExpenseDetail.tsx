@@ -88,19 +88,19 @@ function ExpenseDetail({ navigation, route }: any) {
                 {keys && keys.map((element, index) => {
                     if (element === 'amount') {
                         return (
-                            <Text style={styles.text}>
+                            <Text style={styles.text} key={`${element}-${index}`}>
                                 {/* https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript */}
                                 {element.charAt(0).toUpperCase() + element.slice(1)}:
-                                <Text key={`${element}-${index}`} style={styles.text}>  ${expense[element]}</Text>
+                                <Text style={styles.text}>  ${expense[element]}</Text>
                             </Text>
                         );
                     }
                     else {
-                        {/* unsure how to make this typing error to go away */ }
                         return (
-                            <Text style={styles.text}>
+                            <Text style={styles.text} key={`${element}-${index}`}>
                                 {element.charAt(0).toUpperCase() + element.slice(1)}:
-                                <Text key={`${element}-${index}`} style={styles.text}>  {expense[element]}</Text>
+                                {/* unsure how to make this typing error to go away */}
+                                <Text style={styles.text}>  {expense[element]}</Text>
                             </Text>
                         );
                     }
