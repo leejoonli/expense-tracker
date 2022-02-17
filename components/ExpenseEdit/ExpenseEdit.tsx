@@ -70,7 +70,10 @@ function ExpenseEdit({ navigation, route }: any) {
                     <TextInput style={styles.input} placeholder='Date: Use YYYY-MM-DD Format' onChangeText={(event) => handleExpenseChange(event, 'date')} value={editExpense.date} />
                 </View>
                 <Pressable style={styles.submit} onPress={handleEditSubmit}><Text style={styles.submitText}>Submit</Text></Pressable>
-                <Pressable onPress={() => { setEditModal(true) }}><Text>How To Edit</Text></Pressable>
+                <Pressable style={styles.submit} onPress={() => {
+                    setEditModal(true);
+                    Vibration.vibrate(10);
+                }}><Text style={styles.submitText}>How To Edit</Text></Pressable>
             </View>
             <Modal
                 animationType='slide'
@@ -79,10 +82,11 @@ function ExpenseEdit({ navigation, route }: any) {
                     setEditModal(!editModal);
                 }}
             >
-                <View>
-                    <Text>The name and category should be editable through the keyboard.</Text>
-                    <Text>The amount should be editable through a number pad.</Text>
-                    <Text>The date needs to have YYYY-MM-DD format.  Note the hyphens are necessary.  Make sure there are no spaces either.</Text>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>The name and category should be editable through the keyboard.</Text>
+                    <Text style={styles.modalText}>The amount should be editable through a number pad.</Text>
+                    <Text style={styles.modalText}>The date needs to have YYYY-MM-DD format.  Note the hyphens are necessary and make sure there are no spaces either.</Text>
+                    <Pressable style={styles.modalPressable} onPress={() => setEditModal(false)}><Text style={styles.modalClose}>Close</Text></Pressable>
                 </View>
             </Modal>
         </View>
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     formText: {
         color: 'white',
         fontSize: 20,
-        marginBottom: 5,
+        marginBottom: 2,
     },
     input: {
         backgroundColor: 'white',
@@ -116,6 +120,26 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     submitText: {
+        textAlign: 'center',
+    },
+    modalView: {
+        padding: 20,
+        backgroundColor: '#0047bb',
+        margin: 30,
+    },
+    modalText: {
+        color: 'white',
+        lineHeight: 17,
+        marginBottom: 20,
+        fontSize: 15,
+    },
+    modalPressable: {
+        backgroundColor: 'white',
+        width: 100,
+    },
+    modalClose: {
+        color: 'black',
+        padding: 5,
         textAlign: 'center',
     }
 });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Pressable, } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Pressable, Vibration } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -51,7 +51,10 @@ function Profile({ navigation, route }: any) {
                     data={expenses}
                     style={styles.expenseList}
                     renderItem={({ item }) => (
-                        <Pressable onPress={() => navigation.navigate('ExpenseDetail', { id: item.id })}>
+                        <Pressable onPress={() => {
+                            navigation.navigate('ExpenseDetail', { id: item.id });
+                            Vibration.vibrate(10);
+                        }}>
                             <View style={styles.expenseLink}>
                                 <Text style={styles.text}>{item.name}</Text>
                                 <Text style={styles.text}>${item.amount}</Text>
