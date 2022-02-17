@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Track your expenses with this simple application.  Create a new expense, view all your listed expenses, edit existing ones, or delete them as necessary.",
+    "githubUrl": "https://github.com/leejoonli/expense-tracker"
   }
 }
