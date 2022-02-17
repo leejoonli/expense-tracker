@@ -39,3 +39,17 @@ https://reactnative.dev/docs/environment-setup
 4. Fork and clone this repository to your machine using `git clone PASTE_SSH_OR_HTTPS_HERE`
 5. `cd` into the newly created directory
 6. Run `npm i` or `npm install` to install dependencies
+
+If you're having difficulty in the installation process, visit this link for more information:
+https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+## Current Application State
+
+
+## Future Improvements
+
+## Contribution Guidelines
+
+### How to Identify Bugs
+
+## Initial Planning
