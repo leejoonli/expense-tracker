@@ -231,6 +231,7 @@ function Home({ navigation }: any) {
                     </View>
                 </View>
             </Modal>
+            <Text style={styles.title}>Expense Tracker</Text>
             {loggedIn ? <Text style={styles.text}>Signed in as: {user.username}</Text> : <Text style={styles.text}>Not Signed In</Text>}
             {/* pressables to show either sign up or login modal, or to logout */}
             <Pressable onPress={() => {
@@ -253,7 +254,7 @@ function Home({ navigation }: any) {
 const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         paddingBottom: 100,
     },
     text: {
@@ -304,6 +305,14 @@ const styles = StyleSheet.create({
     pressableText: {
         textAlign: 'center'
     },
+    title: {
+        fontSize: 25,
+        textAlign: 'center',
+        backgroundColor: '#0047bb',
+        color: 'white',
+        padding: 15,
+        marginBottom: 25,
+    }
 });
 
 export default Home;
