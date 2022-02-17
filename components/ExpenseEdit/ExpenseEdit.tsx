@@ -39,7 +39,7 @@ function ExpenseEdit({ navigation, route }: any) {
             if (status === 200) {
                 // using alert for now to notify user that an expense has been updated
                 alert('expense changed');
-                // navigate to expense detail
+                // navigate to Home
                 navigation.popToTop();
                 // vibration for user feedback
                 Vibration.vibrate(10);

@@ -21,8 +21,8 @@ export default function App() {
         <Stack.Screen name='Home' component={Home} options={{ title: 'Welcome' }} />
         <Stack.Screen name='Profile' component={Profile} options={{ title: 'Profile' }} />
         <Stack.Screen name='ExpenseDetail' component={ExpenseDetail} options={{ title: 'Expense Detail' }} />
-        <Stack.Screen name='ExpenseEdit' component={ExpenseEdit} options={{ title: 'Expense Edit' }} />
-        <Stack.Screen name='ExpenseCreate' component={ExpenseCreate} options={{ title: 'Expense Create' }} />
+        <Stack.Screen name='ExpenseEdit' component={ExpenseEdit} options={{ title: 'Edit Expense' }} />
+        <Stack.Screen name='ExpenseCreate' component={ExpenseCreate} options={{ title: 'Create Expense' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

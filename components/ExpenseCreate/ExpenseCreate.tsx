@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
+import { Text, View, TextInput, Pressable, StyleSheet, Vibration } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -33,9 +33,10 @@ function ExpenseCreate({ navigation, route }: any) {
                 setCreateExpense(createInit);
                 // using alert for now to notify user of new expense created
                 alert('you created a new expense');
-                // navigate to Profile
-                // navigation.navigate('Profile', { name: 'Lulu' });
+                // navigate to Home
                 navigation.popToTop();
+                // vibration for user feedback
+                Vibration.vibrate(10);
             }
         } catch (error: any) {
             // error logging

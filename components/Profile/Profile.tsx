@@ -45,7 +45,10 @@ function Profile({ navigation, route }: any) {
 
     return (
         <View style={styles.container}>
-            <Pressable onPress={() => navigation.navigate('ExpenseCreate')}><Text style={styles.profileTitle}>Add New Expense</Text></Pressable>
+            <Pressable onPress={() => {
+                navigation.navigate('ExpenseCreate');
+                Vibration.vibrate(10);
+            }}><Text style={styles.profileTitle}>Add New Expense</Text></Pressable>
             {expenses && (
                 <FlatList
                     data={expenses}
