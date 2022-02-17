@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Button, View, Modal, TextInput, Pressable } from 'react-native';
+import { Text, Button, View, Modal, TextInput, Pressable, StyleSheet, Vibration } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -181,7 +181,7 @@ function Home({ navigation }: any) {
     }
 
     return (
-        <View>
+        <View style={styles.homeContainer}>
             {/* sign up modal */}
             <Modal
                 animationType='slide'
@@ -214,14 +214,30 @@ function Home({ navigation }: any) {
                     <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
                 </View>
             </Modal>
-            {loggedIn && <Text>{user.username}</Text>}
+            {loggedIn ? <Text style={styles.text}>Signed in as: {user.username}</Text> : <Text style={styles.text}>Not Signed In</Text>}
             {/* pressables to show either sign up or login modal, or to logout */}
-            <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>sign up</Text></Pressable>
-            <Pressable onPress={() => setLoginModal(!loginModal)}><Text>log in</Text></Pressable>
-            <Pressable onPress={handleLogout}><Text>log out</Text></Pressable>
-            {loggedIn && <Button title='go to profile' onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} />}
+            <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text style={styles.text}>Sign Up</Text></Pressable>
+            <Pressable onPress={() => setLoginModal(!loginModal)}><Text style={styles.text}>Log In</Text></Pressable>
+            <Pressable onPress={handleLogout}><Text style={styles.text}>Log Out</Text></Pressable>
+            {loggedIn && <Pressable onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} ><Text style={styles.text}>Go To Profile</Text></Pressable>}
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    homeContainer: {
+        paddingTop: 25,
+    },
+    text: {
+        backgroundColor: '#0047bb',
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 23,
+        padding: 15,
+        borderRadius: 5,
+        margin: 30,
+        marginTop: 0,
+    },
+});
 
 export default Home;
