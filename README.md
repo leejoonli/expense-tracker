@@ -43,7 +43,7 @@ You will need to download this application to view it using the QR code reader.
 ### React Native Environment
 1. In your terminal run `npm install -g expo-cli`.  This will globally install the Expo CLI.
 2. Install the Expo Go app on your phone.
-3. After installing expo, follow the GitHub installation below.  After you finish the Gihub Installation steps, move onto step 4.
+3. After installing expo, follow the GitHub installation below.  After you finish the Github Installation steps, move onto step 4.
 4. Run `npm start`. If your app isn't building try and run `export NODE_OPTIONS=--openssl-legacy-provider` first.
 5. You should see a QR code that you can use your Expo app for.
 6. After reading the QR code with Expo, you should be directed to the application.
@@ -84,6 +84,7 @@ https://docs.github.com/en/repositories/creating-and-managing-repositories/cloni
 - Add more details for each expense.
 - Adjust navigation stack to trigger rerenders and have the most up to date data from api.
 - Deploy to Netlify for possible easier viewing experience.
+- Currently, there's a possibility on initial startup that any login/signup request will take a few seconds to complete.  Please be patient.  If it doesn't work in a reasonable amount of time, please restart the application.
 
 ## Contribution Guidelines
 
