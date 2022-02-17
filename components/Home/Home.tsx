@@ -254,7 +254,6 @@ function Home({ navigation }: any) {
 const styles = StyleSheet.create({
     homeContainer: {
         flex: 1,
-        // justifyContent: 'center',
         paddingBottom: 100,
     },
     text: {

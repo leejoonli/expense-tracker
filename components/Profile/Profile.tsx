@@ -75,9 +75,10 @@ const styles = StyleSheet.create({
     profileTitle: {
         backgroundColor: '#0047bb',
         color: 'white',
-        fontSize: 25,
-        width: 500,
-        padding: 20,
+        fontSize: 20,
+        width: 260,
+        padding: 10,
+        marginTop: 20,
         textAlign: 'center',
     },
     expenseList: {
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#0047bb',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 20,
+        padding: 15,
         marginBottom: 15,
     },
     text: {
