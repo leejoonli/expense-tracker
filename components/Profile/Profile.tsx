@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, Pressable, Button, NativeSyntheticEvent, TextInputChangeEventData, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Pressable, } from 'react-native';
 import axios from 'axios';
-import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // need to find types for props that are currently listed
@@ -59,7 +58,6 @@ function Profile({ navigation, route }: any) {
                             </View>
                         </Pressable>
                     )} />)}
-            <StatusBar style="auto" />
         </View>
     );
 }

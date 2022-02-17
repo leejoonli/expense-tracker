@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Button, View, Modal, TextInput, Pressable, StyleSheet, Vibration, StatusBar } from 'react-native';
+import { Text, View, Modal, TextInput, Pressable, StyleSheet, Vibration } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -246,7 +246,6 @@ function Home({ navigation }: any) {
                 navigation.navigate('Profile');
                 Vibration.vibrate(10);
             }} ><Text style={styles.text}>Go To Profile</Text></Pressable>}
-            <StatusBar style="auto" />
         </View>
     );
 }
