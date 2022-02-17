@@ -86,7 +86,10 @@ function ExpenseEdit({ navigation, route }: any) {
                     <Text style={styles.modalText}>The name and category should be editable through the keyboard.</Text>
                     <Text style={styles.modalText}>The amount should be editable through a number pad.</Text>
                     <Text style={styles.modalText}>The date needs to have YYYY-MM-DD format.  Note the hyphens are necessary and make sure there are no spaces either.</Text>
-                    <Pressable style={styles.modalPressable} onPress={() => setEditModal(false)}><Text style={styles.modalClose}>Close</Text></Pressable>
+                    <Pressable style={styles.modalPressable} onPress={() => {
+                        setEditModal(false);
+                        Vibration.vibrate(10);
+                    }}><Text style={styles.modalClose}>Close</Text></Pressable>
                 </View>
             </Modal>
         </View>
