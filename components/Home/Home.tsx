@@ -128,6 +128,8 @@ function Home({ navigation }: any) {
                 // setUser(res.data);
                 // close sign up modal
                 setSignUpModal(false);
+                // vibration response on mobile
+                Vibration.vibrate(10);
             }
         } catch (error: any) {
             // error logging
