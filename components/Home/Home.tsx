@@ -152,6 +152,8 @@ function Home({ navigation }: any) {
                 // close login modal and set logged in to true
                 setLoginModal(!loginModal);
                 setLoggedIn(true);
+                // vibration response on mobile
+                Vibration.vibrate(10);
             }
         } catch (error: any) {
             // error logging
@@ -173,6 +175,8 @@ function Home({ navigation }: any) {
                 // clear local storage and set logged in to false
                 await AsyncStorage.clear();
                 setLoggedIn(false);
+                // vibration response on mobile
+                Vibration.vibrate(10);
             }
         } catch (error: any) {
             // error logging
@@ -195,38 +199,60 @@ function Home({ navigation }: any) {
                     <TextInput placeholder='Username' onChangeText={(event) => handleSignUpChange(event, 'username')} value={signUpInput.username} />
                     <TextInput placeholder='Password' onChangeText={(event) => handleSignUpChange(event, 'password')} value={signUpInput.password} />
                     <TextInput placeholder='Re Password' onChangeText={(event) => handleSignUpChange(event, 're_password')} value={signUpInput.re_password} />
-                    <Pressable onPress={handleSignUpSubmit}><Text>submit</Text></Pressable>
-                    <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text>close</Text></Pressable>
+                    <View style={styles.modalPressable}>
+                        <Pressable onPress={handleSignUpSubmit}><Text>submit</Text></Pressable>
+                        <Pressable onPress={() => {
+                            setSignUpModal(!signUpModal);
+                            Vibration.vibrate(10);
+                        }}><Text>close</Text></Pressable>
+                    </View>
                 </View>
             </Modal>
             {/* login modal */}
             <Modal
+                style={styles.loginModal}
                 animationType='slide'
                 visible={loginModal}
                 onRequestClose={() => {
                     setLoginModal(!loginModal);
                 }}
             >
-                <View>
-                    <TextInput placeholder='email' onChangeText={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
-                    <TextInput placeholder='password' onChangeText={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
-                    <Pressable onPress={handleLoginSubmit}><Text>log in</Text></Pressable>
-                    <Pressable onPress={() => setLoginModal(!loginModal)}><Text>close</Text></Pressable>
+                <View style={styles.loginContainer}>
+                    <TextInput style={styles.loginFormInput} placeholder='email' onChangeText={(event) => handleLoginChange(event, 'email')} value={loginInput.email} />
+                    <TextInput style={styles.loginFormInput} placeholder='password' onChangeText={(event) => handleLoginChange(event, 'password')} value={loginInput.password} />
+                    <View>
+                        <Pressable style={styles.modalPressable} onPress={handleLoginSubmit}><Text style={styles.pressableText}>Log In</Text></Pressable>
+                        <Pressable style={[styles.modalPressable, styles.loginClose]} onPress={() => {
+                            setLoginModal(!loginModal);
+                            Vibration.vibrate(10);
+                        }}><Text style={styles.pressableText}>Close</Text></Pressable>
+                    </View>
                 </View>
             </Modal>
             {loggedIn ? <Text style={styles.text}>Signed in as: {user.username}</Text> : <Text style={styles.text}>Not Signed In</Text>}
             {/* pressables to show either sign up or login modal, or to logout */}
-            <Pressable onPress={() => setSignUpModal(!signUpModal)}><Text style={styles.text}>Sign Up</Text></Pressable>
-            <Pressable onPress={() => setLoginModal(!loginModal)}><Text style={styles.text}>Log In</Text></Pressable>
+            <Pressable onPress={() => {
+                setSignUpModal(!signUpModal);
+                Vibration.vibrate(10);
+            }}><Text style={styles.text}>Sign Up</Text></Pressable>
+            <Pressable onPress={() => {
+                setLoginModal(!loginModal);
+                Vibration.vibrate(10);
+            }}><Text style={styles.text}>Log In</Text></Pressable>
             <Pressable onPress={handleLogout}><Text style={styles.text}>Log Out</Text></Pressable>
-            {loggedIn && <Pressable onPress={() => navigation.navigate('Profile', { name: 'Lulu' })} ><Text style={styles.text}>Go To Profile</Text></Pressable>}
+            {loggedIn && <Pressable onPress={() => {
+                navigation.navigate('Profile');
+                Vibration.vibrate(10);
+            }} ><Text style={styles.text}>Go To Profile</Text></Pressable>}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     homeContainer: {
-        paddingTop: 25,
+        flex: 1,
+        justifyContent: 'center',
+        paddingBottom: 100,
     },
     text: {
         backgroundColor: '#0047bb',
@@ -234,9 +260,47 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 23,
         padding: 15,
-        borderRadius: 5,
-        margin: 30,
+        marginLeft: 45,
+        marginRight: 45,
         marginTop: 0,
+        marginBottom: 30,
+        // for some reason this isn't loading on phone on expo so it's commented out
+        // shadowColor: 'black',
+        // shadowOffset: { width: 0, height: 3 },
+        // shadowOpacity: .5,
+        // shadowRadius: 4,
+        // elevation: 5,
+    },
+    loginModal: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    loginContainer: {
+        marginTop: 50,
+        marginLeft: 50,
+        marginRight: 50,
+        padding: 25,
+        backgroundColor: '#0047bb',
+        justifyContent: 'center',
+    },
+    loginFormInput: {
+        padding: 5,
+        backgroundColor: 'white',
+        color: 'black',
+        marginBottom: 25,
+    },
+    modalPressable: {
+        backgroundColor: 'white',
+        marginBottom: 25,
+        padding: 7,
+        width: 100,
+    },
+    loginClose: {
+        marginBottom: 0,
+    },
+    pressableText: {
+        textAlign: 'center'
     },
 });
 
