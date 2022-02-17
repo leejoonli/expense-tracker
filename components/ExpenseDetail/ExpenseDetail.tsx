@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Vibration } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -33,6 +33,7 @@ function ExpenseDetail({ navigation, route }: any) {
     // state variable to store expense detail
     const [expense, setExpense] = useState(init);
 
+    // state variable to store the keys of response data
     const [keys, setKeys] = useState<Array<string> | undefined>([]);
 
     // useEffect to use api call
@@ -51,7 +52,6 @@ function ExpenseDetail({ navigation, route }: any) {
             setExpense(data);
             // turn object keys into array of strings and filter out the ones not to display
             const keys: Array<string> = Object.keys(expense).filter((element) => { return element !== 'id' && element !== 'expense_url' && element !== 'owner' });
-            // console.log(keys);
             // set state to array of keys
             setKeys(keys);
         } catch (error: any) {
@@ -64,7 +64,7 @@ function ExpenseDetail({ navigation, route }: any) {
     const handleDelete = async (): Promise<void> => {
         try {
             // get token from async storage
-            const token = await AsyncStorage.getItem('token');
+            const token: string | null = await AsyncStorage.getItem('token');
             // DELETE request to remove data from database
             const res = await axios.delete(`https://salty-eyrie-01871.herokuapp.com/expenses/${id}`, { headers: { Authorization: `Token ${token}` } });
             const status: number = res.status;
@@ -72,8 +72,9 @@ function ExpenseDetail({ navigation, route }: any) {
                 // using alert for now to notify user that an expense is deleted
                 alert('expense deleted');
                 // navigate to profile
-                // navigation.navigate('Profile', { name: 'Lulu' });
                 navigation.popToTop();
+                // vibration for user feedback
+                Vibration.vibrate(10);
             }
         } catch (error: any) {
             // error logging
@@ -82,17 +83,36 @@ function ExpenseDetail({ navigation, route }: any) {
     }
 
     return (
-        <View>
-            {/* need to fix this typing issue */}
-            {keys && keys.map((element, index) => {
-                return (
-                    <Text key={`${index}`}>{expense[element]}</Text>
-                )
-            })}
-            <Pressable onPress={() => navigation.navigate('ExpenseEdit', { expense: expense })} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
-            <Pressable onPress={handleDelete} style={{ backgroundColor: 'aqua' }}><Text>Delete</Text></Pressable>
+        <View style={styles.detailContainer}>
+            {/* unsure how to make this typing error to go away */}
+            <View style={styles.details}>
+                {keys && keys.map((element, index) => {
+                    return (
+                        <Text key={`${index}`}>{expense[element]}</Text>
+                    );
+                })}
+                <Pressable onPress={() => {
+                    navigation.navigate('ExpenseEdit', { expense: expense });
+                    Vibration.vibrate(10);
+                }} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
+                <Pressable onPress={handleDelete} style={{ backgroundColor: 'aqua' }}><Text>Delete</Text></Pressable>
+            </View>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    detailContainer: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: 'red',
+        padding: 50,
+    },
+    details: {
+        borderWidth: 1,
+        borderColor: 'red',
+        padding: 10,
+    }
+});
 
 export default ExpenseDetail;
