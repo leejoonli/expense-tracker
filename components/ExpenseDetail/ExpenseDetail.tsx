@@ -87,9 +87,16 @@ function ExpenseDetail({ navigation, route }: any) {
             {/* unsure how to make this typing error to go away */}
             <View style={styles.details}>
                 {keys && keys.map((element, index) => {
-                    return (
-                        <Text key={`${index}`}>{expense[element]}</Text>
-                    );
+                    if (element === 'amount') {
+                        return (
+                            <Text key={`${element}-${index}`} style={styles.text}>${expense[element]}</Text>
+                        );
+                    }
+                    else {
+                        return (
+                            <Text key={`${element}-${index}`} style={styles.text}>{expense[element]}</Text>
+                        );
+                    }
                 })}
                 <Pressable onPress={() => {
                     navigation.navigate('ExpenseEdit', { expense: expense });
@@ -112,7 +119,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'red',
         padding: 10,
-    }
+        backgroundColor: '#0047bb',
+    },
+    text: {
+        color: 'white',
+    },
 });
 
 export default ExpenseDetail;
