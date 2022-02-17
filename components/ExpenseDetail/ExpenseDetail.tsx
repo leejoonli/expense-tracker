@@ -84,25 +84,32 @@ function ExpenseDetail({ navigation, route }: any) {
 
     return (
         <View style={styles.detailContainer}>
-            {/* unsure how to make this typing error to go away */}
             <View style={styles.details}>
                 {keys && keys.map((element, index) => {
                     if (element === 'amount') {
                         return (
-                            <Text key={`${element}-${index}`} style={styles.text}>${expense[element]}</Text>
+                            <Text style={styles.text}>
+                                {/* https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript */}
+                                {element.charAt(0).toUpperCase() + element.slice(1)}:
+                                <Text key={`${element}-${index}`} style={styles.text}>  ${expense[element]}</Text>
+                            </Text>
                         );
                     }
                     else {
+                        {/* unsure how to make this typing error to go away */ }
                         return (
-                            <Text key={`${element}-${index}`} style={styles.text}>{expense[element]}</Text>
+                            <Text style={styles.text}>
+                                {element.charAt(0).toUpperCase() + element.slice(1)}:
+                                <Text key={`${element}-${index}`} style={styles.text}>  {expense[element]}</Text>
+                            </Text>
                         );
                     }
                 })}
                 <Pressable onPress={() => {
                     navigation.navigate('ExpenseEdit', { expense: expense });
                     Vibration.vibrate(10);
-                }} style={{ backgroundColor: 'lemonchiffon' }}><Text>Edit</Text></Pressable>
-                <Pressable onPress={handleDelete} style={{ backgroundColor: 'aqua' }}><Text>Delete</Text></Pressable>
+                }} style={styles.pressable}><Text style={[styles.text, styles.pressableText]}>Edit</Text></Pressable>
+                <Pressable onPress={handleDelete} style={styles.pressable}><Text style={[styles.text, styles.pressableText, styles.delete]}>Delete</Text></Pressable>
             </View>
         </View>
     );
@@ -123,7 +130,23 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
+        padding: 5,
+        fontSize: 20,
+        marginBottom: 5,
     },
+    pressable: {
+        backgroundColor: 'white',
+        width: 100,
+        marginBottom: 10,
+    },
+    pressableText: {
+        fontSize: 15,
+        textAlign: 'center',
+        color: 'black',
+    },
+    delete: {
+        marginBottom: 0,
+    }
 });
 
 export default ExpenseDetail;
