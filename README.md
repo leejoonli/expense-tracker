@@ -23,9 +23,9 @@ https://github.com/leejoonli/expense-tracker-backend
 
 ### React Native Environment
 1. In your terminal run `npm install -g expo-cli`.  This will globally install the Expo CLI.
-2. Install the Expo app on your phone.
+2. Install the Expo Go app on your phone.
 3. After installing expo, follow the GitHub installation below.  After you finish the Gihub Installation steps, move onto step 4.
-4. Run `npm start`.
+4. Run `npm start`. If your app isn't building try and run `export NODE_OPTIONS=--openssl-legacy-provider` first.
 5. You should see a QR code that you can use your Expo app for.
 6. After reading the QR code with Expo, you should be directed to the application.
 
@@ -44,6 +44,18 @@ If you're having difficulty in the installation process, visit this link for mor
 https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
 ## Current Application State
+
+### Home
+![home](https://media.git.generalassemb.ly/user/40293/files/c22f4700-8fdf-11ec-9e94-f8d0eb520c3a)
+
+### User Login / Signup
+![login](https://media.git.generalassemb.ly/user/40293/files/3c5fcb80-8fe0-11ec-86ce-083a3a63b852)
+
+### Profile
+![profile](https://media.git.generalassemb.ly/user/40293/files/95c7fa80-8fe0-11ec-971c-20e4b9d5d87f)
+
+### Expense Detail / Edit
+![detail](https://media.git.generalassemb.ly/user/40293/files/37e7e280-8fe1-11ec-9f68-c74b3ecc0b47)
 
 ## Future Improvements
 
