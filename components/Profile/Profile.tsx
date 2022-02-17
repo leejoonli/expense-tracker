@@ -21,9 +21,6 @@ function Profile({ navigation, route }: any) {
     // set list of expenses state to init variable
     const [expenses, setExpenses] = useState(init);
 
-    // test for text input <-GET RID OF LATER
-    // const [text, setText] = useState('');
-
     // useEffect to make api call to fetch data
     useEffect(() => {
         getData();
@@ -47,36 +44,22 @@ function Profile({ navigation, route }: any) {
         }
     }
 
-    // handle change test for text input.  need to figure out event type
-    // const handleChange = (event: any) => {
-    //     setText(event.target.value);
-    // }
-
-    // on press test for native pressable core component
-    const onPressFunction = () => {
-        console.log('you pressed me');
-    }
-
     return (
         <View style={styles.container}>
-            <Pressable onPress={() => navigation.navigate('ExpenseCreate')} style={{ backgroundColor: 'aqua' }}><Text>Add New Expense</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate('ExpenseCreate')}><Text style={styles.profileTitle}>Add New Expense</Text></Pressable>
             {expenses && (
                 <FlatList
                     data={expenses}
                     style={styles.expenseList}
                     renderItem={({ item }) => (
-                        <Pressable onPress={() => navigation.navigate('ExpenseDetail', { id: item.id })} style={styles.pressTest}>
-                            <View style={{ backgroundColor: 'lemonchiffon' }}>
-                                <Text>{item.name}</Text>
-                                <Text>{item.amount}</Text>
+                        <Pressable onPress={() => navigation.navigate('ExpenseDetail', { id: item.id })}>
+                            <View style={styles.expenseLink}>
+                                <Text style={styles.text}>{item.name}</Text>
+                                <Text style={styles.text}>${item.amount}</Text>
                             </View>
                         </Pressable>
                     )} />)}
-            {/* {expenses && (<FlatList data={expenses} style={styles.expenseList} renderItem={({ item }) => <Text style={styles.testtext}>{item.category}</Text>} />)} */}
-            <View style={styles.testContainer}>
-                <Pressable onPress={() => navigation.navigate('ExpenseDetail')}><Text>Go to expense detail</Text></Pressable>
-                <StatusBar style="auto" />
-            </View>
+            <StatusBar style="auto" />
         </View>
     );
 }
@@ -88,20 +71,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    profileTitle: {
+        backgroundColor: '#0047bb',
+        color: 'white',
+        fontSize: 25,
+        width: 500,
+        padding: 20,
+        textAlign: 'center',
+    },
     expenseList: {
         flex: 1,
+        width: 300,
+        padding: 20,
     },
-    pressTest: {
-        borderWidth: 1,
-        borderColor: 'rgba(155, 0, 0, 1)',
+    expenseLink: {
+        backgroundColor: '#0047bb',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 20,
+        marginBottom: 15,
     },
-    testContainer: {
-        flex: 1,
-    },
-    testtext: {
-        borderColor: 'rgba(155, 0, 0, 1)',
-        borderWidth: 2,
-        flex: 1,
+    text: {
+        color: 'white',
+        fontSize: 20,
     },
 });
 
