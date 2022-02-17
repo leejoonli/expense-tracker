@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Pressable, Vibration, StyleSheet } from 'react-native';
+import { Text, View, TextInput, Pressable, Vibration, StyleSheet, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -20,6 +20,8 @@ function ExpenseEdit({ navigation, route }: any) {
 
     // set state variable to expense variable listed above
     const [editExpense, setEditExpense] = useState(expense);
+
+    const [editModal, setEditModal] = useState<boolean>(false);
 
     // onchange handle function
     const handleExpenseChange = (event: string, key: string | number) => {
@@ -68,7 +70,21 @@ function ExpenseEdit({ navigation, route }: any) {
                     <TextInput style={styles.input} placeholder='Date: Use YYYY-MM-DD Format' onChangeText={(event) => handleExpenseChange(event, 'date')} value={editExpense.date} />
                 </View>
                 <Pressable style={styles.submit} onPress={handleEditSubmit}><Text style={styles.submitText}>Submit</Text></Pressable>
+                <Pressable onPress={() => { setEditModal(true) }}><Text>How To Edit</Text></Pressable>
             </View>
+            <Modal
+                animationType='slide'
+                visible={editModal}
+                onRequestClose={() => {
+                    setEditModal(!editModal);
+                }}
+            >
+                <View>
+                    <Text>The name and category should be editable through the keyboard.</Text>
+                    <Text>The amount should be editable through a number pad.</Text>
+                    <Text>The date needs to have YYYY-MM-DD format.  Note the hyphens are necessary.  Make sure there are no spaces either.</Text>
+                </View>
+            </Modal>
         </View>
     );
 }

@@ -118,13 +118,9 @@ function ExpenseDetail({ navigation, route }: any) {
 const styles = StyleSheet.create({
     detailContainer: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: 'red',
         padding: 50,
     },
     details: {
-        borderWidth: 1,
-        borderColor: 'red',
         padding: 10,
         backgroundColor: '#0047bb',
     },
