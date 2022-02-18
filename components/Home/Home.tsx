@@ -54,8 +54,10 @@ function Home({ navigation }: any) {
     const [signUpModal, setSignUpModal] = useState<boolean>(false);
     const [loginModal, setLoginModal] = useState<boolean>(false);
 
+    // check to see if a user is already logged in
     const getData = async (): Promise<boolean | undefined> => {
         try {
+            // check to see if token exists and set logged in state
             const value: string | null = await AsyncStorage.getItem('token');
             if (!value) {
                 setLoggedIn(false);
@@ -124,6 +126,7 @@ function Home({ navigation }: any) {
             const res = await axios.post(`https://salty-eyrie-01871.herokuapp.com/users/`, signUpInput);
             const status: number = res.status;
             if (status === 201) {
+                // currently not implemented but want to add in an auto log in feature
                 // set response data to user state variable
                 // setUser(res.data);
                 // close sign up modal
@@ -149,7 +152,6 @@ function Home({ navigation }: any) {
             const status: number = res.status;
             if (status === 200) {
                 // set auth token in local storage
-                // console.log(res);
                 await AsyncStorage.setItem('token', res.data.auth_token);
                 // close login modal and set logged in to true
                 setLoginModal(!loginModal);

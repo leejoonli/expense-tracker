@@ -98,21 +98,6 @@ This application is for expense tracking.  I've read that this kind of project w
 
 ### Your tech stack (frontend, backend, database)
 Frontend: React, React Native, Typescript
-Backend: Django, Python, SQL, AWS
-
-### List of backend models and their properties
-```js
-class Expense
-    name
-    amount
-    category
-    date
-    owner
-
-class User
-    email
-    avatar
-```
 
 ### React component hierarchy (if applicable)
 App
