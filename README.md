@@ -84,7 +84,7 @@ https://docs.github.com/en/repositories/creating-and-managing-repositories/cloni
 - Add more details for each expense.
 - Adjust navigation stack to trigger rerenders and have the most up to date data from api.
 - Deploy to Netlify for possible easier viewing experience.
-- Currently, there's a possibility on initial startup that any login/signup request will take a few seconds to complete.  Please be patient.  If it doesn't work in a reasonable amount of time, please restart the application.
+- Currently on initial startup, any login/signup/logout request will take a few seconds to complete because Heroku takes some time to wake up.  Please be patient.  If it doesn't work in a reasonable amount of time, please restart the application.
 
 ## Contribution Guidelines
 
@@ -137,3 +137,11 @@ STRETCH GOALS
 ![image](https://media.git.generalassemb.ly/user/40293/files/d3e88a00-8ac7-11ec-9399-19f9fc331858)
 ![image](https://media.git.generalassemb.ly/user/40293/files/de0a8880-8ac7-11ec-91b3-e7ed7ae1c096)
 ![image](https://media.git.generalassemb.ly/user/40293/files/e2cf3c80-8ac7-11ec-90ad-433977492384)
+
+## Unsolved Problems
+
+The biggest unsolved problem would be to find a better design layout for the application.  Currently, it essentially looks like a basic todo list and I would like the application to look better than what it is.  There is one Typescript error/warning in the Expense Detail component and I'm not exactly sure how to fix it.  It does not break the application but it doesn't look good having the red squiggle in my code.  Regarding Typescript, some variables or functions do not have typings and the props are labeld as 'any'.  I know this is considered bad habits but I wasn't sure how to type them.  Another problem would be the use of Navigation Stack and how it doesn't rerender until you go to the previous Stack.  I'm not sure if using Router will fix the issue but it is something to look into.  Also, I would like to improve the backend with more data on the expense modal.
+
+## Major Hurdles
+
+As with all new technology, the biggest hurdle was learning how to use it.  Thankfully, there's very detailed documentation regarding React Native and it's related packages.  Not just for React Native, but also for Typescript as well.  And speaking of Typescript, learning how to type variables and different data structures were definitely a challenge as well.  I wanted to built good habits while using Typescript since it's rising in popularity but I cannot say that I followed the good habits guide exactly.  Overall, this project was a good experience with independent research and implementation and a great learning experience.
